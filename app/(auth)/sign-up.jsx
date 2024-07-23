@@ -31,7 +31,7 @@ const SignUp = () => {
                resizeMode="contain"
              />
               
-              <Text className="text-2xl text-white">Sign Up</Text>
+              <Text className="text-2xl text-white font-psemibold">Sign Up</Text>
               
               <FormField
                  title="Username"
@@ -68,9 +68,9 @@ const SignUp = () => {
              />
                
              <View className="justify-center pt-5 flex-row gap-2">
-              <Text className="text-lg text-gray-200">Have and account already?</Text>
+              <Text className="text-lg text-gray-200 font-pregular">Have and account already?</Text>
 
-              <Link href="/sign-in" className="text-lg text-secondary">Sign in</Link>
+              <Link href="/sign-in" className="text-lg text-secondary font-psemibold">Sign in</Link>
              </View>
 
               </View>  

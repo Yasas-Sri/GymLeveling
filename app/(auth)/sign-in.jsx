@@ -32,7 +32,7 @@ const SignIn = () => {
 
              {/* <Text className="text-2xl text-white mt-10"></Text> */}
               
-              <Text className="text-2xl text-white mt-2">Log in</Text>
+              <Text className="text-2xl text-white mt-2 font-psemibold">Log in</Text>
               
               <FormField
                  title="Email"
@@ -60,9 +60,9 @@ const SignIn = () => {
              />
                
              <View className="justify-center pt-5 flex-row gap-2">
-              <Text className="text-lg text-gray-200">Don't have account?</Text>
+              <Text className="text-lg text-gray-200 font-pregular">Don't have account?</Text>
 
-              <Link href="/sign-up" className="text-lg text-orange-400">Sign Up</Link>
+              <Link href="/sign-up" className="text-lg text-orange-400 font-psemibold">Sign Up</Link>
 
 
               {/* just for checking home , dummy link remove after auth */}
