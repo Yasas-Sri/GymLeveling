@@ -18,6 +18,19 @@ const Authlayout = () => {
                headerShown:false
              }}
          />
+          <Stack.Screen
+             name="gender"
+             options={{
+               headerShown:false
+             }}
+         />
+
+          <Stack.Screen
+             name="userInfo"
+             options={{
+               headerShown:false
+             }}
+         />
           
 
       </Stack> 

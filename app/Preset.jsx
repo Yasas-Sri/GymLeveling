@@ -37,8 +37,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   card: {
-    backgroundColor: 'white',
-    borderRadius: 8,
+    backgroundColor: '#0A0A2C',   //0A0A2C   1A1A51
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor:'white',
     width: viewportWidth - 120,
     height:400,
     marginHorizontal: 10,

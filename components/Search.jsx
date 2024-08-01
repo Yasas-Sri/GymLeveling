@@ -57,7 +57,7 @@ const Search = () => {
         placeholder="Search"
         onChangeText={handleSearch}
         value={searchQuery}
-        className="mx-7 mb-3.5"
+        className="mx-7 mb-3.5 bg-lightB  border-lightB border-2"
       />
       <FlatList
         data={filteredData}

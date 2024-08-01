@@ -1,11 +1,14 @@
 import { View, Text } from 'react-native'
-import {Stack} from 'expo-router';
+import {Stack,SplashScreen} from 'expo-router';
 import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import Exercises from './Exercises';
 import Preset from './Preset';
 import {useFonts} from 'expo-font'
+import { useEffect } from "react";
 
+
+SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
 
@@ -20,6 +23,23 @@ const RootLayout = () => {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
+
+  useEffect(() => {
+    if (error) throw error;
+
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if (!fontsLoaded && !error) {
+    return null;
+  }
+
 
   return (
    
