@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
-const CustomCard = ({containerStyles,title,color}) => (
-  <Card className={`${containerStyles} ${color}`}>
-    <Card.Title title= {title}   />
+
+// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+
+
+const CustomCard = ({containerStyles,title,color,style}) => (
+  <Card className={`${containerStyles} ${color} ` }>
+    <Card.Title  title= {title}  titleStyle={{ color: 'white' }}  />
     <Card.Content>
-      <Text variant="titleLarge">Card content</Text>
+      <Text variant="titleLarge" className="text-white">Card content</Text>
       <Text variant="bodyMedium"></Text>
     </Card.Content>
     {/* <Card.Cover source={{ uri:  }} /> */}

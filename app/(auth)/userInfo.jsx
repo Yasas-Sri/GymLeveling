@@ -1,8 +1,12 @@
-import { View, Text,Pressable,Platform,TextInput } from 'react-native'
-import React,{useState} from 'react'
+import { View, Text,Pressable,Platform,TextInput,Image,StyleSheet,TouchableWithoutFeedback ,Keyboard} from 'react-native'
+import React,{useState,useRef} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import DateTimePicker from "@react-native-community/datetimepicker"
 import FormField from '../../components/FormField'
+import {Picker} from '@react-native-picker/picker';
+import SelectPicker from '../../components/SelectPicker'
+import CustomButton from '../../components/CustomButton'
+import { Link,Redirect,router } from 'expo-router';
 
 //  import { TextInput } from 'react-native-paper'
 
@@ -14,10 +18,17 @@ const UserInfo = () => {
   const [dateOfBirth,setDateOfBirth] =useState("")
 
 
+
   const toggleDatepicker = () =>{
       setShowPicker(!showPicker)
-      
+    
   }
+
+  const handleClick = () =>{
+
+   router.push('/userPhoto')   
+ }
+
 
   const onChange = ({type},selectedDate) =>{
      if(type =="set"){
@@ -35,8 +46,17 @@ const UserInfo = () => {
   }
 
   return (
+   <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
      <SafeAreaView className="bg-primary h-full">
         <View className="space-y-2 mt-7 w-full  px-4 "> 
+
+        <Image
+            source={require('../../assets/l3.png')}
+            className="w-[115px] h-[120px] "
+            resizeMode="contain"
+         />
+
+
         <Text  className="text-base text-gray-100 font-pmedium">Date of Birth</Text>
         
         <Pressable onPress={toggleDatepicker} >
@@ -54,14 +74,16 @@ const UserInfo = () => {
       {/* {!showPicker && ( */}
      
          <TextInput
-            className="flex-1 text-white text-base font-psemibold bg-primary  "
+            className="flex-1 text-white text-base font-psemibold bg-primary focus:border-orange-400 "
             placeholder=" Date"
-            placeholderTextColor="#7b7b8b"
+            placeholderTextColor="#808080"
             value={dateOfBirth}
             onChangeText={setDateOfBirth}
              editable={false}
              onPressIn={toggleDatepicker}
             inputMode='numeric'
+           
+            
          />
          
       {/* ) } */}
@@ -72,7 +94,8 @@ const UserInfo = () => {
        </Pressable>
 
        </View> 
-
+         
+       
        <View className="space-y-2 mt-7 w-full px-4 justify-center "> 
         <Text  className="text-base text-gray-100 font-pmedium">Height</Text>
         
@@ -80,11 +103,13 @@ const UserInfo = () => {
      
 
          <TextInput
+            
             className="flex-1 text-white text-base font-psemibold bg-primary"
             placeholder="  height"
-            placeholderTextColor="#7b7b8b"
-            
-            
+            placeholderTextColor="#808080"
+            keyboardType='numeric'
+            inputMode='numeric'
+         
                      />
       
       
@@ -92,9 +117,54 @@ const UserInfo = () => {
        
        </View>
        </View>
+      
+
+       <View className="space-y-2 mt-7 w-full px-4 justify-center "> 
+        <Text  className="text-base text-gray-100 font-pmedium">Experience level</Text>
+        
+        <View className="  focus:border-orange-400 " > 
+           {/* className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row" */}
+
+         {/* <TextInput
+            className="flex-1 text-white text-base font-psemibold bg-primary"
+            placeholder="time period"
+            placeholderTextColor="#7b7b8b"
+            keyboardType='numeric'
+            inputMode='numeric'
+                     /> */}
+         <SelectPicker/>
+      
+  
+       
+       </View>
+       </View>
+        
+       <View className=" px-4 my-20">  
+      <CustomButton
+                title="Continue"
+                handlePress={handleClick}
+                containerStyles="mt-5"
+                // isLoading={isSubmitting}
+             />
+        </View> 
 
      </SafeAreaView>
+     </TouchableWithoutFeedback>
   )
 }
+
+
+const styles = StyleSheet.create({
+   pickerContainer: {
+     backgroundColor: 'blue',        // Blue background for the dropdown on Android
+     borderRadius: 8,
+   },
+   picker: {
+     color: 'white',                 // Sets text color inside Picker
+     backgroundColor: 'blue',        // Apply background color for Android
+   }
+ });
+
+
 
 export default UserInfo

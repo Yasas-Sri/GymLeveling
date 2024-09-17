@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity ,Image} from 'react-native'
 import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton'
 import { Link,Redirect,router } from 'expo-router';
+import { Button } from 'react-native-paper';
 
 
 
@@ -32,6 +33,19 @@ const Gender = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
+
+      <View className="space-y-2 mt-7 w-full  px-4 "> 
+
+        <Image 
+         source={require('../../assets/l3.png')}
+         className="w-[115px] h-[120px] "
+         resizeMode="contain"
+        />
+
+        </View>
+
+
+
        
        <View className="flex-1 justify-start items-center mt-10">
         <Text className="text-white text-2xl font-psemibold">Tell us about You</Text>
@@ -39,14 +53,20 @@ const Gender = () => {
         <Text className="text-white text-2xl font-pmedium mt-10">Select</Text>
 
          <View className="mt-20 justify-between items-start flex-row gap-x-7  "> 
-
+             
+         <TouchableOpacity>
            <View className=" border-white border-2 px-4 py-4">
+           
          <GenIcon
                icon="face-man-shimmer"  
                size={70}
                gender="Male"
                /> 
+               
             </View>
+            </TouchableOpacity>  
+
+          <TouchableOpacity>   
          <View className=" border-white border-2 px-4 py-4">     
            <GenIcon
                icon="face-woman-shimmer"  
@@ -54,7 +74,8 @@ const Gender = () => {
                gender="Female"
                />       
            </View>
-         
+           </TouchableOpacity>
+
            </View>
 
       </View>  
