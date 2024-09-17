@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
+import { Link,Redirect,router } from 'expo-router';
 
 const SignUp = () => {
 
@@ -19,6 +19,16 @@ const SignUp = () => {
 
 
  }
+
+ const routeChange= () =>{
+           
+         router.push('/gender')
+ }
+
+ const handleClick = ()=>{
+          submit();
+          routeChange();  
+ };
 
   return (
      <SafeAreaView className="bg-primary h-full">
@@ -59,13 +69,15 @@ const SignUp = () => {
                  otherStyles="mt-7"
                  
               />  
-                
+
+              
              <CustomButton
                 title="Sign Up"
-                handlePress={submit}
+                handlePress={handleClick}
                 containerStyles="mt-7"
                 isLoading={isSubmitting}
              />
+             
                
              <View className="justify-center pt-5 flex-row gap-2">
               <Text className="text-lg text-gray-200 font-pregular">Have and account already?</Text>
