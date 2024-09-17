@@ -7,6 +7,8 @@ module.exports = {
            primary:'#0A0A2C',
            secondary:'#FF7E06',
            lightB:'rgba(17,17,79,0.5)',
+           borderB:'#363670',
+           cardB:'#0f0f36'
        },
 
        fontFamily: {

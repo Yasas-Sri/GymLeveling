@@ -16,10 +16,10 @@ const Workout = ({}) => {
     <View className="justify-around items-start flex-row mt-10">
 
 
-        <RNButton mode="contained-tonal" title="Preset"   style={`rounded-r-lg  ${activeComponent === 'Preset' ? 'bg-secondary ' : 'bg-lightB '} `} handlePress={() => setActiveComponent('Preset')} />  
+        <RNButton mode="contained-tonal" title="Preset"   style={`rounded-r-lg  ${activeComponent === 'Preset' ? 'bg-secondary ' : 'bg-lightB  '} `} handlePress={() => setActiveComponent('Preset')} />  
 
 
-      <RNButton mode="contained-tonal" title="Exercises" style={`rounded-l-lg  ${activeComponent === 'Exercises' ? 'bg-secondary' : 'bg-lightB'} gap-x-44 `} 
+      <RNButton mode="contained-tonal" title="Exercises" style={`rounded-l-lg  ${activeComponent === 'Exercises' ? 'bg-secondary' : 'bg-lightB '} gap-x-44 `} 
          handlePress={() => setActiveComponent('Exercises')}/>
 
       </View>

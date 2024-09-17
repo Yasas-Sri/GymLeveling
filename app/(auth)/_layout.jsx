@@ -31,11 +31,18 @@ const Authlayout = () => {
                headerShown:false
              }}
          />
+
+          <Stack.Screen
+             name="userPhoto"
+             options={{
+               headerShown:false
+             }}
+         />
           
 
       </Stack> 
 
-      {/* <StatusBar backgroundColor='#161622' style='light'/> */}
+      <StatusBar backgroundColor='#0A0A2C' style='dark'/>
     </>
   )
 }

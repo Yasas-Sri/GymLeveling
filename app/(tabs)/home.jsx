@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
 import CustomCard from '../../components/CustomCard'
 import CustomIconButton from '../../components/CustomIconButton'
@@ -6,8 +6,9 @@ import { IconButton, MD3Colors } from 'react-native-paper';
 
 const Home = () => {
   return (
-    <SafeAreaView>
-         <View className="bg bg-primary h-full">
+    <SafeAreaView  className="bg-primary h-full">
+        <ScrollView>
+         <View className=" min-h-[75vh]">
           <View my-6 px-4 space-y-6>
           <View className="justify-between items-start flex-row ">
            <View> 
@@ -30,13 +31,14 @@ const Home = () => {
             
               <CustomCard
                title="Today's activites"
-               containerStyles="min-w-2 mx-4 my-4"
-               color="bg-orange-200"
+               containerStyles="min-w-2 mx-4 my-4 border-2 border-borderB text-white"
+               color="bg-cardB "
+               style="text-white"
               />
                           
  
           </View>
-
+          </ScrollView>
     </SafeAreaView>
   )
 }

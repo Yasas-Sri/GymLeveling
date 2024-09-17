@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
-      <ScrollView className="space-y-2 mt-7 w-full  px-4 ">
+      <ScrollView className="space-y-2 mt-7 w-full px-4 ">
         <View className="items-center mb-6">
           <Image
             source={{ uri: 'https://via.placeholder.com/100' }}
@@ -26,8 +26,8 @@ const Profile = () => {
           {menuItems.map((item, index) => (
             <Pressable
               key={index}
-              className="flex-row items-center justify-between p-4 border border-gray-200 rounded-lg bg-lightB"
-              onPress={() => alert(`Navigate to ${item.title}`)}
+              className="flex-row items-center justify-between p-4 border border-borderB rounded-lg bg-lightB"
+             // onPress={() => alert(`Navigate to ${item.title}`)}
             >
               <View className="flex-row items-center">
                 <Image source={item.icon} className="w-8 h-8 mr-4" />

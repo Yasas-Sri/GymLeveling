@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   card: {
-    backgroundColor: '#0A0A2C',   //0A0A2C   1A1A51
+    backgroundColor: '#0f0f36',   //0A0A2C   1A1A51
     borderRadius: 20,
     borderWidth: 1,
-    borderColor:'white',
+    borderColor:'#363670',
     width: viewportWidth - 120,
     height:400,
     marginHorizontal: 10,
