@@ -7,6 +7,8 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 import { deleteSchedule, getSchedule, saveSchedule } from '../api/saveBooking';
 
+import useStore from '../store';
+
 
 // Function to get today's date in 'YYYY-MM-DD' format
 const getCurrentDate = () => {
@@ -33,6 +35,10 @@ const CalendarPick = () => {
   const [time, setTime] = useState(new Date()); // State to store selected time
   const [showPicker, setShowPicker] = useState(false); // State to control picker visibility
   const [timeText, setTimeText] = useState(''); // State to display selected time in TextInput
+
+
+  const { jsonData, setJsonData } = useStore(); // zustand store
+
 
   // Function to handle time change
   const onChange = (event, selectedTime) => {
@@ -77,7 +83,9 @@ const CalendarPick = () => {
     setModalVisible(false); // Hide modal
     // <BookData bookData={{time,newEvent}} URL={'http://192.168.8.125:3000/api/dataRN'}/>
     saveSchedule({ timeText , newEvent,selected })
+    //const getdata = getSchedule();
     getSchedule();
+    // setJsonData(getdata);
      
   };
 
@@ -167,7 +175,7 @@ const CalendarPick = () => {
        }}
         onPress={() => deleteEvent(date,index)}    //
     >
-       <FontAwesome5 name="trash" size={20} color="white" />
+       <FontAwesome5 name="trash" size={15} color="white" />
        {/* <Text style={{ color: '#fff', marginLeft: 10 }}>Delete</Text> */}
     </TouchableOpacity>
         </View>
@@ -180,7 +188,7 @@ const CalendarPick = () => {
 
     if (allDates.length === 0) {
       
-      return <Text className="text-white  bg-cardB px-2.5 py-1 mx-1.5 my-1.5 border-4 border-borderB">No bookings</Text>;
+      return <Text className="text-white  bg-cardB    space-y-2 mt-7   px-4 ">No bookings</Text>;
       
     }
 
@@ -230,7 +238,7 @@ const CalendarPick = () => {
           }}
         />
         {/* {renderEventsForSelectedDate()} */}
-        <Text>
+        <Text className=" space-y-2  font-pmedium  px-4">
         {renderAllEvents()} {/* Render all events */}
         </Text>     
       </Fragment>
@@ -272,7 +280,7 @@ const CalendarPick = () => {
           value={time}
           mode="time"
           display="default"
-          is24Hour={false} // Set to true for 24-hour format
+          is24Hour={false} 
           onChange={onChange} // Handle time selection
         />
       )}
@@ -306,7 +314,9 @@ const styles = StyleSheet.create({
     borderColor:'#363670',
     borderRadius: 20,
     borderWidth: 1,
-  
+    flex:1,
+    marginLeft:5,
+    marginRight:5,
   },
   text: {
     textAlign: 'center',

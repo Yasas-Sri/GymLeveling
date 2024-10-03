@@ -1,16 +1,23 @@
 import { View, Text } from 'react-native'
-import {Stack,SplashScreen} from 'expo-router';
+import {Stack,SplashScreen ,Link,Redirect,router} from 'expo-router';
 import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-import Exercises from './Exercises';
-import Preset from './Preset';
+import Exercises from './(tabs)/Workout/Exercises';
+import Preset from './(tabs)/Workout/Preset';
 import {useFonts} from 'expo-font'
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
+import { supabase } from '../lib/supabase'
+import SignInStack from './../components/SignInStack';
+import SignOutStack from './../components/SignOutStack';
 
 
 SplashScreen.preventAutoHideAsync();
 
+
+
 const RootLayout = () => {
+
+  const [session, setSession] = useState(null);
 
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -32,6 +39,43 @@ const RootLayout = () => {
     }
   }, [fontsLoaded, error]);
 
+
+  // Track the auth state
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN') {
+          setSession(session)
+        } else  {
+          setSession(null)
+        }
+      }
+    );
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      // subscription.unsubscribe()
+      authListener?.subscription.unsubscribe();
+    };
+  }, []);
+
+
+
+
+  // useEffect(() => {
+  //   if (session) {
+  //     router.replace('./(tabs)/home'); // Replace the current stack
+  //   } else {
+  //     router.replace('/(auth)'); // Navigate to auth stack
+  //   }
+  // }, [session]);
+
+
+
+
+
+
+  
   if (!fontsLoaded) {
     return null;
   }
@@ -41,17 +85,35 @@ const RootLayout = () => {
   }
 
 
+
+
+
   return (
    
+     <>
+    
+{/* {session && 
+     <SignInStack />
+      }
   
-     <Stack>
-        <Stack.Screen name="index" options={{headerShown:false}} />
-        <Stack.Screen name="(auth)" options={{headerShown:false}} />
-        <Stack.Screen name="(tabs)" options={{headerShown:false}} />
-        <Stack.Screen name="Preset"  options={{headerShown:false}} />
-        <Stack.Screen name="Exercises" options={{headerShown:false}} />
-     </Stack>
 
+   {!session && 
+       <SignOutStack />
+     } */}
+    
+    <Stack>
+        <Stack.Screen name="index" options={{headerShown:false}} />
+         <Stack.Screen name="(auth)" options={{ headerShown:false}}/>
+          <Stack.Screen name="(tabs)" options={{ headerShown:false}}/>
+
+         
+
+      </Stack> 
+
+     
+   
+
+    </>
 
 
   )

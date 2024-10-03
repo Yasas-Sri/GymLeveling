@@ -1,4 +1,5 @@
 import {api} from './index.js'
+import useStore from '../store';
 
 const BASE_URL = 'http://192.168.8.125:3000'
 
@@ -19,7 +20,9 @@ export const getSchedule = async () => {
     try {
         const url = `${BASE_URL}/api/dataRN`;
         const response = await api.get(url);
-        
+        const { setJsonData } = useStore.getState();
+
+         setJsonData(response);
         console.log(response)
          
         // setResponseMessage(data.message || 'Data received successfully!');

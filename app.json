@@ -1,14 +1,12 @@
 {
   "expo": {
     "name": "GymApp",
-    "scheme": "GymApp",
+    "scheme": "com.supabase",
     "slug": "GymApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    
-    
-      "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/l1.png",
       "resizeMode": "contain",
@@ -17,14 +15,17 @@
     "jsEngine": "hermes",
     "ios": {
       "supportsTablet": true,
-       "jsEngine": "jsc"
+      "jsEngine": "jsc"
     },
     "android": {
-      
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.gymapp.gymleveling"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,7 +37,14 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ]
+      ],
+      [
+      "@react-native-google-signin/google-signin",
+      
+      {
+        "iosUrlScheme": "com.googleusercontent.apps.189228566588-60886262dhlt6b7q85ru70jkg370m2ll.apps.googleusercontent.com"
+      }
+    ]
     ]
   }
 }

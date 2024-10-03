@@ -1,22 +1,67 @@
-import { View, Text, ScrollView,Image } from 'react-native'
-import React,{useState} from 'react' 
+import { View, Text, ScrollView,Image,Alert } from 'react-native'
+import React,{useState,useEffect} from 'react' 
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
+import { Link,Redirect,router,useNavigation } from 'expo-router';
+import { supabase } from '../../lib/supabase'
+import { CommonActions } from '@react-navigation/native';
+// import GoogleSignin from '../../components/GoogleSignin'
 
 const SignIn = () => {
 
- const [form,setForm] = useState({
-     email:'',
-     password:''
- })
+//  const [form,setForm] = useState({
+//      email:'',
+//      password:''
+//  })
 
- const [isSubmitting,setIsSubmitting] = useState(false)
+// const [isSubmitting,setIsSubmitting] = useState(false)
+
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [loading, setLoading] = useState(false)
+
+const navigation = useNavigation();
+
+async function signInWithEmail() {
+   setLoading(true)
+   const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+   })
+
+   if (error) Alert.alert(error.message)
+   else{ 
+   //  router.dismissAll();
+     router.replace('/home')    
+//     navigation.reset({
+//       index: 0,
+//       routes: [{ name: 'home' }], // your stack screen name
+//   });
+   }    
+    setLoading(false)
+    
+ }
+
+
+//  const [session, setSession] = useState(null)
+
+//   useEffect(() => {
+//     supabase.auth.getSession().then(({ data: { session } }) => {
+//       setSession(session)
+//     })
+
+//     supabase.auth.onAuthStateChange((_event, session) => {
+//       setSession(session)
+//     })
+//   }, [])
+
+
+ 
 
  const submit = () =>{
 
-
+   router.push('/home')  
  }
 
   return (
@@ -36,27 +81,25 @@ const SignIn = () => {
               
               <FormField
                  title="Email"
-                 value={form.email}
-                 handleChangeText={(e)=> setForm({...form,email:e
-                 })}
+                 value={email}
+                 handleChangeText={(text) => setEmail(text)}
                  otherStyles="mt-7"
                  keyboardType="email-address"
               />
 
               <FormField
                  title="Password"
-                 value={form.password}
-                 handleChangeText={(e)=> setForm({...form,password:e
-                 })}
+                 value={password}
+                 handleChangeText={(text) => setPassword(text)}
                  otherStyles="mt-7"
                  
               />  
                 
              <CustomButton
                 title="Sign in"
-                handlePress={submit}
+                handlePress={signInWithEmail}
                 containerStyles="mt-7"
-                isLoading={isSubmitting}
+                isLoading={loading}
              />
                
              <View className="justify-center pt-5 flex-row gap-2">
@@ -67,10 +110,13 @@ const SignIn = () => {
 
               {/* just for checking home , dummy link remove after auth */}
               
-              <Link href="/home" className="text-orange-400 text-lg" >home</Link> 
+               <Link href="/home" className="text-orange-400 text-lg" >home</Link>  
 
 
              </View>
+
+
+               {/* <GoogleSignin/> */}
 
               </View>  
          </ScrollView>
