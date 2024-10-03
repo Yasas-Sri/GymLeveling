@@ -5,7 +5,8 @@
     "bodyPart": "waist",
     "equipment": "body weight",
     "name": "3/4 sit-up",
-    "target": "abs"
+    "target": "abs",
+    "description": "Lie on your back with your knees bent and feet flat on the ground. Place your hands behind your head. Engage your core and lift your upper body towards your knees, stopping at a 3/4 position. Lower back down with control."
   },
   {
     "id": "0002",
@@ -13,7 +14,8 @@
     "bodyPart": "waist",
     "equipment": "body weight",
     "name": "45° side bend",
-    "target": "abs"
+    "target": "abs",
+    "description": "Stand with your feet shoulder-width apart. Hold a weight in one hand and lean to the side, bending at the waist to bring the weight down towards your knee. Return to the starting position and repeat. Alternate sides."
   },
   {
     "id": "0003",
@@ -21,7 +23,8 @@
     "bodyPart": "waist",
     "equipment": "body weight",
     "name": "air bike",
-    "target": "abs"
+    "target": "abs",
+    "description": "Lie on your back with your hands behind your head and legs raised. Bring one knee towards your chest while twisting your torso to touch the opposite elbow to that knee. Alternate sides in a pedaling motion."
   },
   {
     "id": "0004",
@@ -29,7 +32,8 @@
     "bodyPart": "waist",
     "equipment": "body weight",
     "name": "alternate heel touchers",
-    "target": "abs"
+    "target": "abs",
+    "description": "Lie on your back with your knees bent and feet flat. Lift your shoulders off the ground and reach towards your right heel, then to your left. Keep alternating sides while engaging your core."
   },
   {
     "id": "0005",
@@ -37,7 +41,8 @@
     "bodyPart": "back",
     "equipment": "cable",
     "name": "alternate lateral pulldown",
-    "target": "lats"
+    "target": "lats",
+    "description": "Sit at a cable machine with the bar set above you. Grab the bar with a wide grip. Pull the bar down to your chest, alternating between each side, engaging your lats throughout."
   },
   {
     "id": "0006",
@@ -45,7 +50,8 @@
     "bodyPart": "chest",
     "equipment": "leverage machine",
     "name": "assisted chest dip (kneeling)",
-    "target": "pectorals"
+    "target": "pectorals",
+    "description": "Kneel on the assisted dip machine. Grip the handles and lower your body until your elbows are at a 90-degree angle. Push back up to the starting position."
   },
   {
     "id": "0007",
@@ -53,7 +59,8 @@
     "bodyPart": "waist",
     "equipment": "assisted",
     "name": "assisted hanging knee raise with throw down",
-    "target": "abs"
+    "target": "abs",
+    "description": "Hang from a pull-up bar with your arms straight. Engage your core and raise your knees towards your chest, then lower them back down with control, adding a gentle throw down motion."
   },
   {
     "id": "0008",
@@ -61,7 +68,8 @@
     "bodyPart": "waist",
     "equipment": "assisted",
     "name": "assisted hanging knee raise",
-    "target": "abs"
+    "target": "abs",
+    "description": "Hang from a pull-up bar with your arms straight. Engage your core and raise your knees towards your chest. Lower your legs back down slowly."
   },
   {
     "id": "0009",
@@ -69,7 +77,8 @@
     "bodyPart": "waist",
     "equipment": "assisted",
     "name": "assisted lying leg raise with lateral throw down",
-    "target": "abs"
+    "target": "abs",
+    "description": "Lie on your back with your legs extended. Lift your legs towards the ceiling and then lower them to the side in a controlled manner, returning to the center before lowering back down."
   },
   {
     "id": "0010",
@@ -77,7 +86,8 @@
     "bodyPart": "waist",
     "equipment": "assisted",
     "name": "assisted lying leg raise with throw down",
-    "target": "abs"
+    "target": "abs",
+    "description": "Lie on your back with your legs extended. Lift your legs towards the ceiling, then lower them while adding a gentle throw down motion to engage your core effectively."
   },
   {
     "id": "0011",
@@ -85,7 +95,8 @@
     "bodyPart": "waist",
     "equipment": "medicine ball",
     "name": "assisted motion russian twist",
-    "target": "abs"
+    "target": "abs",
+    "description": "Sit on the ground with your knees bent and lean back slightly. Hold a medicine ball and rotate your torso to touch the ball to the ground on each side, using the assistance to control the movement."
   },
   {
     "id": "0012",
@@ -93,7 +104,8 @@
     "bodyPart": "back",
     "equipment": "leverage machine",
     "name": "assisted parallel close grip pull-up",
-    "target": "lats"
+    "target": "lats",
+    "description": "Use an assisted pull-up machine. Grip the close handles, lower your body, and then pull yourself up using your lats. Use the assistance to complete the movement."
   },
   {
     "id": "0013",
@@ -101,7 +113,8 @@
     "bodyPart": "upper legs",
     "equipment": "assisted",
     "name": "assisted prone hamstring",
-    "target": "hamstrings"
+    "target": "hamstrings",
+    "description": "Lie face down on an assisted hamstring curl machine. Position your legs under the pad and curl them towards your glutes, using the assistance to control the movement."
   },
   {
     "id": "0014",
@@ -109,7 +122,8 @@
     "bodyPart": "back",
     "equipment": "leverage machine",
     "name": "assisted pull-up",
-    "target": "lats"
+    "target": "lats",
+    "description": "Stand on the assisted pull-up machine. Grip the handles and pull yourself up while using the assistance to lower your body back down in a controlled manner."
   },
   {
     "id": "0015",
@@ -117,7 +131,8 @@
     "bodyPart": "upper arms",
     "equipment": "assisted",
     "name": "assisted standing triceps extension (with towel)",
-    "target": "triceps"
+    "target": "triceps",
+    "description": "Stand holding a towel attached to an overhead cable. Pull the towel down behind your head while keeping your elbows close to your ears. Return to the starting position."
   },
   {
     "id": "0016",
@@ -125,40 +140,46 @@
     "bodyPart": "upper arms",
     "equipment": "leverage machine",
     "name": "assisted triceps dip (kneeling)",
-    "target": "triceps"
+    "target": "triceps",
+    "description": "Kneel on the assisted dip machine. Grip the handles and lower your body down while keeping your elbows close. Push back up to the starting position."
   },
   {
     "id": "0017",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0017.gif",
     "bodyPart": "upper legs",
     "equipment": "body weight",
-    "name": "balance board",
-    "target": "quads"
+    "name": "backward lunge",
+    "target": "quads",
+    "description": "Stand tall with feet hip-width apart. Step back with one leg, lowering your hips until both knees are bent at about a 90-degree angle. Push through the front heel to return to the starting position."
   },
   {
     "id": "0018",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0018.gif",
-    "bodyPart": "back",
-    "equipment": "barbell",
-    "name": "barbell pullover to press",
-    "target": "lats"
+    "bodyPart": "chest",
+    "equipment": "dumbbell",
+    "name": "bench press",
+    "target": "pectorals",
+    "description": "Lie on a bench with a dumbbell in each hand. Lower the weights to your chest, keeping your elbows at a 45-degree angle. Press the weights back up to the starting position."
   },
   {
     "id": "0019",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0019.gif",
-    "bodyPart": "upper arms",
+    "bodyPart": "back",
     "equipment": "barbell",
-    "name": "barbell alternate biceps curl",
-    "target": "biceps"
+    "name": "bent over row",
+    "target": "lats",
+    "description": "Stand with your feet shoulder-width apart, holding a barbell. Bend your knees slightly and lean forward from your hips. Pull the barbell towards your abdomen, squeezing your shoulder blades together, then lower it back down."
   },
   {
     "id": "0020",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0020.gif",
-    "bodyPart": "upper legs",
-    "equipment": "barbell",
-    "name": "barbell bench front squat",
-    "target": "quads"
+    "bodyPart": "waist",
+    "equipment": "cable",
+    "name": "cable crunch",
+    "target": "abs",
+    "description": "Kneel in front of a cable machine with the rope attachment. Grasp the rope and pull it down towards your knees while curling your spine. Return to the starting position."
   },
+
   {
     "id": "0021",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0021.gif",
@@ -10592,3 +10613,8 @@
     "target": "biceps"
   }
 ]
+
+
+
+
+

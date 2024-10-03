@@ -5,6 +5,7 @@ import CustomIconButton from '../../components/CustomIconButton'
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 
+
 const TabIcon = ({icon,color,size}) =>{
 
     return (
@@ -69,7 +70,8 @@ const TabsLayout = () => {
         />
 
          <Tabs.Screen
-           name="workout"
+           name="Workout"
+           
            options={{
              title:'Workout',
              headerShown:false,
@@ -112,6 +114,9 @@ const TabsLayout = () => {
                )
            }}
         />
+
+
+       
 
       </Tabs>
     

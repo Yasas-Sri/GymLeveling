@@ -1,34 +1,97 @@
-import { View, Text, ScrollView,Image } from 'react-native'
-import React,{useState} from 'react' 
+import { View, Text, ScrollView,Image,Alert } from 'react-native'
+import React,{useState,useEffect} from 'react' 
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link,Redirect,router } from 'expo-router';
+import { Link,Redirect,router,useNavigation  } from 'expo-router';
+import { supabase } from '../../lib/supabase'
+import { makeRedirectUri } from 'expo-auth-session'
+import * as QueryParams from 'expo-auth-session/build/QueryParams'
+import * as WebBrowser from 'expo-web-browser'
+import * as Linking from 'expo-linking'
+import { CommonActions } from '@react-navigation/native';
+
 
 const SignUp = () => {
 
- const [form,setForm] = useState({
-     username:'',
-     email:'',
-     password:''
- })
+//  const [form,setForm] = useState({
+//      username:'',
+//      email:'',
+//      password:''
+//  })
 
- const [isSubmitting,setIsSubmitting] = useState(false)
+//  const [isSubmitting,setIsSubmitting] = useState(false)
 
- const submit = () =>{
+//  const submit = () =>{
 
 
- }
+//  }
 
- const routeChange= () =>{
+//  const routeChange= () =>{
            
-         router.push('/gender')
+//          router.push('/gender')
+//  }
+
+//  const handleClick = ()=>{
+//           submit();
+//           routeChange();  
+//  };
+
+
+
+ const [email, setEmail] = useState('')
+ const [password, setPassword] = useState('')
+ const [userName, setUserName] = useState('')
+ const [loading, setLoading] = useState(false)
+
+ const navigation = useNavigation();
+
+ async function signUpWithEmail() {
+   setLoading(true)
+   const {
+     data: { session },
+     error,
+   } = await supabase.auth.signUp({
+     email: email,
+     password: password,
+     userName: userName,
+   })
+
+   
+   if (error) Alert.alert(error.message)
+
+   else{
+    // router.dismissAll();
+     router.replace('/gender')
+  //   navigation.reset({
+  //     index: 0,
+  //     routes: [{ name: 'home' }], // your stack screen name
+  // });
+
+   }    
+   if (!session) Alert.alert('Please check your inbox for email verification!')
+   setLoading(false)
+   
  }
 
- const handleClick = ()=>{
-          submit();
-          routeChange();  
- };
+
+ const [session, setSession] = useState(null)
+
+ useEffect(() => {
+   supabase.auth.getSession().then(({ data: { session } }) => {
+     setSession(session)
+   })
+
+   supabase.auth.onAuthStateChange((_event, session) => {
+     setSession(session)
+   })
+ }, [])
+
+ 
+ 
+
+
+
 
   return (
      <SafeAreaView className="bg-primary h-full">
@@ -45,27 +108,24 @@ const SignUp = () => {
               
               <FormField
                  title="Username"
-                 value={form.username}
-                 handleChangeText={(e)=> setForm({...form,username:e
-                 })}
+                 value={userName}
+                 handleChangeText={(text) => setUserName(text)}
                  otherStyles="mt-7"
                  
               />
 
               <FormField
                  title="Email"
-                 value={form.email}
-                 handleChangeText={(e)=> setForm({...form,email:e
-                 })}
+                 value={email}
+                 handleChangeText={(text) =>setEmail(text)}
                  otherStyles="mt-7"
                  keyboardType="email-address"
               />
 
               <FormField
                  title="Password"
-                 value={form.password}
-                 handleChangeText={(e)=> setForm({...form,password:e
-                 })}
+                 value={password}
+                 handleChangeText={(text) => setPassword(text)}
                  otherStyles="mt-7"
                  
               />  
@@ -73,9 +133,9 @@ const SignUp = () => {
               
              <CustomButton
                 title="Sign Up"
-                handlePress={handleClick}
+                handlePress={signUpWithEmail}
                 containerStyles="mt-7"
-                isLoading={isSubmitting}
+                isLoading={loading}
              />
              
                

@@ -28,7 +28,7 @@ const Gender = () => {
   
   const handleClick = () =>{
 
-    router.push('/userInfo')   
+    router.replace('/userInfo')   
   }
 
   return (

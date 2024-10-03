@@ -44,7 +44,20 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import {  Button } from 'react-native';
+import useStore from '../../store';
+
+
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
   const notifications = () => {
 //   const [responseMessage, setResponseMessage] = useState('');
@@ -68,13 +81,42 @@ import { View, Text, Button } from 'react-native';
 //       setResponseMessage('Error: ' + error.message);
 //     }
 //   };
+ 
 
+// store starts here
+  const jsonData = useStore((state) => state.jsonData);
+    
   return (
     <View className="flex-1 justify-start items-center mt-10">
       {/* <Button title="Send Data" onPress={sendData} /> */}
       {/* <Text>{responseMessage}</Text> */}
+       {/* <Text>
+       
+       {jsonData ? JSON.stringify(jsonData, null, 2) : 'No data available'}
+        </Text> 
+      */}
+
     </View>
   );
 };
+// store ends
+
+
+
+
+
+
+  
+
+
 
 export default notifications;
+
+
+
+
+///
+// map = {};
+// array.forEach((item) => {
+//   map[item.id] = item;
+// })

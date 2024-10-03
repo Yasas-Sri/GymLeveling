@@ -5,11 +5,26 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/CustomButton';
 import { overlay, PaperProvider } from 'react-native-paper';
 import {LinearGradient} from 'expo-linear-gradient';
-
-
+import { supabase } from '../lib/supabase'
+import signin from './(auth)/sign-in'
+import React,{useState,useEffect} from 'react'
 
 
 export default function App() {
+
+
+  // const [session, setSession] = useState(null)
+
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session)
+  //   })
+
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session)
+  //   })
+  // }, [])
+
   return (
    <PaperProvider>
     
@@ -33,7 +48,7 @@ export default function App() {
 
              <CustomButton
                  title="Get Started"
-                 handlePress={()=>router.push('/sign-in')}
+                 handlePress={()=>router.replace('/sign-in')}
                  containerStyles="w-full mt-7" 
              />
           

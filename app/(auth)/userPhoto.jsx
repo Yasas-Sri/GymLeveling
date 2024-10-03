@@ -65,7 +65,7 @@ const userPhoto = () => {
 
   const handleClick = () =>{
 
-    router.push('/home')   
+    router.replace('/home')   
   }
 
   const pickImageFromGallery = async () => {

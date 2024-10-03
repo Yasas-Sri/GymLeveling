@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback,useMemo } from 'react';
 import { Searchbar } from 'react-native-paper';
 import { View, Text, FlatList } from 'react-native';
 import debounce from 'lodash.debounce';
@@ -21,7 +21,7 @@ const Search = () => {
       setFilteredData(filtered);
     }
     else{
-      setFilteredData([]);
+      setFilteredData(data);
       
     }
     }, 300),
@@ -37,11 +37,11 @@ const Search = () => {
   };
 
   const renderItem = useCallback(({ item }) => (
-    <View>
-
+    <View >
+     
       <ItemList 
          name={item.name} 
-        //  target={item.target}
+         exerciseID={item.id}
 
          gifPhoto={item.gifUrl}
       />
@@ -64,10 +64,17 @@ const Search = () => {
         data={filteredData}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
-        getItemLayout={(data, index) => (
-          { length: 50, offset: 50 * index, index }
-        )}
+        
+     
+        initialNumToRender={10} // How many items to render initially
+        maxToRenderPerBatch={10} // Render this many items per scroll batch
+        windowSize={5}
+
+        // getItemLayout={(data, index) => (
+        //   { length: 14, offset: 14 * index, index }
+        // )}
       />
+       
     </>
   );
 

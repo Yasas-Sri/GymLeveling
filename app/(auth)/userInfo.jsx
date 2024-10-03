@@ -26,7 +26,7 @@ const UserInfo = () => {
 
   const handleClick = () =>{
 
-   router.push('/userPhoto')   
+   router.replace('/userPhoto')   
  }
 
 

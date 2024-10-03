@@ -1,0 +1,146 @@
+[
+    {
+      "id": "241a457b-1b4b-42e4-ae20-1d28b7b35150",
+      "title": "Full Body 1",
+      "description":"",
+      "exercises": ["0028","0043","0045","0364","0289","0373","0744"],
+       "sets": "3"
+    },
+
+    {
+        "id": "99ce312b-5b50-435a-97af-bc68bae08400",
+        "title": "Full Body 2",
+        "description":"",
+        "exercises": ["0039","0021","0537","0494","0145","0379","0963"],
+         "sets": "3"
+      },
+
+      {
+        "id": "56fd9bd0-4c61-48e0-bacf-e549d6940c28",
+        "title": "Full Body 3",
+        "description":"",
+        "exercises": ["1088","0367","0291","0028","0045","0209"],
+        "sets": "3"
+      },
+
+      {
+        "id": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9",
+        "title": "Upper 1",
+        "description":"",
+        "exercises": ["0043","0045","0379","0537","0027","0130"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "4afac5a3-13af-4be8-80b3-6b82fa9e71fd",
+        "title": "Lower 1",
+        "description":"",
+        "exercises": ["0915","0080","0364","1211"],
+        "sets": "3"
+          
+      },
+      
+
+      {
+        "id": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6",
+        "title": "Upper 2",
+        "description":"",
+        "exercises": ["0514","0021","0043","0268","0553","0140","0326","0176"],
+        "sets": "3"
+          
+      },
+
+
+      {
+        "id": "e2800c9d-e348-4813-aab4-0ab83a64835a",
+        "title": "Lower 2",
+        "description":"",
+        "exercises": ["0039","0028","0581","0513","0502","0681","0289"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "5f0b843c-e313-4695-aced-821e30d49150",
+        "title": "Push 1",
+        "description":"",
+        "exercises": ["0021","0314","0130","1125","0136","0249"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e",
+        "title": "Pull",
+        "description":"",
+        "exercises": ["0028","0282","0068","0468","0800","0158"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "eb2d1300-4ce1-482e-ac34-553a801e1fbb",
+        "title": "Leg",
+        "description":"",
+        "exercises": ["0039","0571","0291","0513","0255"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "c455f54d-0388-4f65-9ca1-09d347d775ab",
+        "title": "Calisthenics 1",
+        "description":"",
+        "exercises": ["1185","0786","1076","0801","0008","1274","0705","0655"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "5b74c0cc-429b-4ff4-a19d-ec448b09393e",
+        "title": "Calisthenics 2",
+        "description":"",
+        "exercises": ["0423","0781","0223","0635","0436","0858","1290"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "0937263c-9c7e-4f7f-9533-c3aee7deca38",
+        "title": "Only Dumbells 1",
+        "description":"",
+        "exercises": ["0240","0360","0367","0289","1078","0291","0852"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "198ce2b6-ab59-4715-beb6-cc02429c6f7c",
+        "title": "Only Dumbells 2",
+        "description":"",
+        "exercises": ["1009","0248","0368","0291","1074","0363"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d",
+        "title": "No equipment 1",
+        "description":"",
+        "exercises": ["0786","0004","1139","0435","0408","0529","0238","0424"],
+        "sets": "3"
+          
+      },
+
+      {
+        "id": "5a0cad27-41bd-423c-a153-37cc01e73950",
+        "title": "No equipment 2",
+        "description":"",
+        "exercises": ["0227","0236","0226","0436","1290","0634","0001","0003"],
+        "sets": "3"
+          
+      }
+    
+  
+]
