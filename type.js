@@ -1,28 +1,28 @@
-import { ViewStyle, TextStyle } from 'react-native';
+// import { ViewStyle, TextStyle } from 'react-native';
 
 export const ContextProp = {
   context: undefined, // Replace undefined with a default value if necessary
 };
 
 export const MarkingTypes = {
-  DOT: 'dot',
-  MULTI_DOT: 'multi-dot',
-  PERIOD: 'period',
-  MULTI_PERIOD: 'multi-period',
-  CUSTOM: 'custom',
+  DOT: "dot",
+  MULTI_DOT: "multi-dot",
+  PERIOD: "period",
+  MULTI_PERIOD: "multi-period",
+  CUSTOM: "custom",
 };
 
 export const DayState = {
-  SELECTED: 'selected',
-  DISABLED: 'disabled',
-  INACTIVE: 'inactive',
-  TODAY: 'today',
-  NONE: '', // Default or empty state
+  SELECTED: "selected",
+  DISABLED: "disabled",
+  INACTIVE: "inactive",
+  TODAY: "today",
+  NONE: "", // Default or empty state
 };
 
 export const Direction = {
-  LEFT: 'left',
-  RIGHT: 'right',
+  LEFT: "left",
+  RIGHT: "right",
 };
 
 export const DateData = {
@@ -30,7 +30,7 @@ export const DateData = {
   month: 0,
   day: 0,
   timestamp: 0,
-  dateString: '',
+  dateString: "",
 };
 
 export const Theme = {
@@ -45,51 +45,51 @@ export const Theme = {
   nowIndicatorLine: {},
   nowIndicatorKnob: {},
   timeLabel: {},
-  todayTextColor: '',
-  calendarBackground: '',
-  indicatorColor: '',
-  textSectionTitleColor: '',
-  textSectionTitleDisabledColor: '',
-  dayTextColor: '',
-  selectedDayTextColor: '',
-  monthTextColor: '',
-  selectedDayBackgroundColor: '',
-  arrowColor: '',
-  textDisabledColor: '',
-  textInactiveColor: '',
-  backgroundColor: '',
-  dotColor: '',
-  selectedDotColor: '',
-  disabledArrowColor: '',
-  textDayFontFamily: 'System' ,// Default font family
-  textMonthFontFamily: 'System', // Default font family
-  textDayHeaderFontFamily: 'System', // Default font family
-  textDayFontWeight: 'normal', // Default font weight
-  textMonthFontWeight: 'bold', // Default font weight
-  textDayHeaderFontWeight: 'normal', // Default font weight
+  todayTextColor: "",
+  calendarBackground: "",
+  indicatorColor: "",
+  textSectionTitleColor: "",
+  textSectionTitleDisabledColor: "",
+  dayTextColor: "",
+  selectedDayTextColor: "",
+  monthTextColor: "",
+  selectedDayBackgroundColor: "",
+  arrowColor: "",
+  textDisabledColor: "",
+  textInactiveColor: "",
+  backgroundColor: "",
+  dotColor: "",
+  selectedDotColor: "",
+  disabledArrowColor: "",
+  textDayFontFamily: "System", // Default font family
+  textMonthFontFamily: "System", // Default font family
+  textDayHeaderFontFamily: "System", // Default font family
+  textDayFontWeight: "normal", // Default font weight
+  textMonthFontWeight: "bold", // Default font weight
+  textDayHeaderFontWeight: "normal", // Default font weight
   textDayFontSize: 14, // Default font size
   textMonthFontSize: 16, // Default font size
   textDayHeaderFontSize: 12, // Default font size
-  agendaDayTextColor: '',
-  agendaDayNumColor: '',
-  agendaTodayColor: '',
-  agendaKnobColor: '',
-  todayButtonFontFamily: 'System', // Default font family
-  todayButtonFontWeight: 'normal', // Default font weight
+  agendaDayTextColor: "",
+  agendaDayNumColor: "",
+  agendaTodayColor: "",
+  agendaKnobColor: "",
+  todayButtonFontFamily: "System", // Default font family
+  todayButtonFontWeight: "normal", // Default font weight
   todayButtonFontSize: 14, // Default font size
   textDayStyle: {},
   dotStyle: {},
   arrowStyle: {}, // Ensure ViewStyle is replaced with an empty object
-  todayBackgroundColor: '',
-  disabledDotColor: '',
-  inactiveDotColor: '',
-  todayDotColor: '',
-  todayButtonTextColor: '',
-  todayButtonPosition: '',
+  todayBackgroundColor: "",
+  disabledDotColor: "",
+  inactiveDotColor: "",
+  todayDotColor: "",
+  todayButtonTextColor: "",
+  todayButtonPosition: "",
   arrowHeight: 0,
   arrowWidth: 0,
   weekVerticalMargin: 0,
-  reservationsBackgroundColor: '',
+  reservationsBackgroundColor: "",
   stylesheet: {
     calendar: {
       main: {},
@@ -101,7 +101,7 @@ export const Theme = {
     },
     dot: {},
     marking: {},
-    'calendar-list': {
+    "calendar-list": {
       main: {},
     },
     agenda: {
@@ -115,9 +115,9 @@ export const Theme = {
 };
 
 export const AgendaEntry = {
-  name: '',
+  name: "",
   height: 0,
-  day: '',
+  day: "",
 };
 
 export const AgendaSchedule = {};

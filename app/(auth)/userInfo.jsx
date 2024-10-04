@@ -1,170 +1,150 @@
-import { View, Text,Pressable,Platform,TextInput,Image,StyleSheet,TouchableWithoutFeedback ,Keyboard} from 'react-native'
-import React,{useState,useRef} from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import DateTimePicker from "@react-native-community/datetimepicker"
-import FormField from '../../components/FormField'
-import {Picker} from '@react-native-picker/picker';
-import SelectPicker from '../../components/SelectPicker'
-import CustomButton from '../../components/CustomButton'
-import { Link,Redirect,router } from 'expo-router';
+import {
+  View,
+  Text,
+  Pressable,
+  Platform,
+  TextInput,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import DateTimePicker from "@react-native-community/datetimepicker";
+//import FormField from '../../components/FormField'
+//import {Picker} from '@react-native-picker/picker';
+import SelectPicker from "../../components/SelectPicker";
+import CustomButton from "../../components/CustomButton";
+import { router } from "expo-router";
 
 //  import { TextInput } from 'react-native-paper'
 
 const UserInfo = () => {
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
 
-  const [date,setDate] = useState(new Date());
-  const [showPicker,setShowPicker] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
-  const [dateOfBirth,setDateOfBirth] =useState("")
+  const toggleDatepicker = () => {
+    setShowPicker(!showPicker);
+  };
 
+  const handleClick = () => {
+    router.replace("/UserPhoto");
+  };
 
+  const onChange = ({ type }, selectedDate) => {
+    if (type === "set") {
+      const currentDate = selectedDate;
+      setDate(currentDate);
 
-  const toggleDatepicker = () =>{
-      setShowPicker(!showPicker)
-    
-  }
-
-  const handleClick = () =>{
-
-   router.replace('/userPhoto')   
- }
-
-
-  const onChange = ({type},selectedDate) =>{
-     if(type =="set"){
-         const currentDate = selectedDate
-         setDate(currentDate)
-        
-        if(Platform.OS==="android"){
-           toggleDatepicker();
-           setDateOfBirth(currentDate.toDateString())
-        } 
-     }
-     else{
-        toggleDatepicker()
-     }
-  }
+      if (Platform.OS === "android") {
+        toggleDatepicker();
+        setDateOfBirth(currentDate.toDateString());
+      }
+    } else {
+      toggleDatepicker();
+    }
+  };
 
   return (
-   <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
-     <SafeAreaView className="bg-primary h-full">
-        <View className="space-y-2 mt-7 w-full  px-4 "> 
-
-        <Image
-            source={require('../../assets/l3.png')}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView className="bg-primary h-full">
+        <View className="space-y-2 mt-7 w-full  px-4 ">
+          <Image
+            source={require("../../assets/l3.png")}
             className="w-[115px] h-[120px] "
             resizeMode="contain"
-         />
+          />
 
+          <Text className="text-base text-gray-100 font-pmedium">
+            Date of Birth
+          </Text>
 
-        <Text  className="text-base text-gray-100 font-pmedium">Date of Birth</Text>
-        
-        <Pressable onPress={toggleDatepicker} >
-        <View className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl  focus:border-orange-400  items-center flex-row"> 
-       {showPicker && (
-         <DateTimePicker
-          mode="date"
-          display="spinner"
-          value={date}
-          onChange={onChange}
-      />
-        
-       )} 
+          <Pressable onPress={toggleDatepicker}>
+            <View className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl  focus:border-orange-400  items-center flex-row">
+              {showPicker && (
+                <DateTimePicker
+                  mode="date"
+                  display="spinner"
+                  value={date}
+                  onChange={onChange}
+                />
+              )}
 
-      {/* {!showPicker && ( */}
-     
-         <TextInput
-            className="flex-1 text-white text-base font-psemibold bg-primary focus:border-orange-400 "
-            placeholder=" Date"
-            placeholderTextColor="#808080"
-            value={dateOfBirth}
-            onChangeText={setDateOfBirth}
-             editable={false}
-             onPressIn={toggleDatepicker}
-            inputMode='numeric'
-           
-            
-         />
-         
-      {/* ) } */}
-  
-       
-       </View>
+              {/* {!showPicker && ( */}
 
-       </Pressable>
+              <TextInput
+                className="flex-1 text-white text-base font-psemibold bg-primary focus:border-orange-400 "
+                placeholder=" Date"
+                placeholderTextColor="#808080"
+                value={dateOfBirth}
+                onChangeText={setDateOfBirth}
+                editable={false}
+                onPressIn={toggleDatepicker}
+                inputMode="numeric"
+              />
 
-       </View> 
-         
-       
-       <View className="space-y-2 mt-7 w-full px-4 justify-center "> 
-        <Text  className="text-base text-gray-100 font-pmedium">Height</Text>
-        
-        <View className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row"> 
-     
+              {/* ) } */}
+            </View>
+          </Pressable>
+        </View>
 
-         <TextInput
-            
-            className="flex-1 text-white text-base font-psemibold bg-primary"
-            placeholder="  height"
-            placeholderTextColor="#808080"
-            keyboardType='numeric'
-            inputMode='numeric'
-         
-                     />
-      
-      
-  
-       
-       </View>
-       </View>
-      
+        <View className="space-y-2 mt-7 w-full px-4 justify-center ">
+          <Text className="text-base text-gray-100 font-pmedium">Height</Text>
 
-       <View className="space-y-2 mt-7 w-full px-4 justify-center "> 
-        <Text  className="text-base text-gray-100 font-pmedium">Experience level</Text>
-        
-        <View className="  focus:border-orange-400 " > 
-           {/* className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row" */}
+          <View className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row">
+            <TextInput
+              className="flex-1 text-white text-base font-psemibold bg-primary"
+              placeholder="  height"
+              placeholderTextColor="#808080"
+              keyboardType="numeric"
+              inputMode="numeric"
+            />
+          </View>
+        </View>
 
-         {/* <TextInput
+        <View className="space-y-2 mt-7 w-full px-4 justify-center ">
+          <Text className="text-base text-gray-100 font-pmedium">
+            Experience level
+          </Text>
+
+          <View className="  focus:border-orange-400 ">
+            {/* className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row" */}
+
+            {/* <TextInput
             className="flex-1 text-white text-base font-psemibold bg-primary"
             placeholder="time period"
             placeholderTextColor="#7b7b8b"
             keyboardType='numeric'
             inputMode='numeric'
                      /> */}
-         <SelectPicker/>
-      
-  
-       
-       </View>
-       </View>
-        
-       <View className=" px-4 my-20">  
-      <CustomButton
-                title="Continue"
-                handlePress={handleClick}
-                containerStyles="mt-5"
-                // isLoading={isSubmitting}
-             />
-        </View> 
+            <SelectPicker />
+          </View>
+        </View>
 
-     </SafeAreaView>
-     </TouchableWithoutFeedback>
-  )
-}
+        <View className=" px-4 my-20">
+          <CustomButton
+            title="Continue"
+            handlePress={handleClick}
+            containerStyles="mt-5"
+            // isLoading={isSubmitting}
+          />
+        </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
+  );
+};
 
+// const styles = StyleSheet.create({
+//    pickerContainer: {
+//      backgroundColor: 'blue',        // Blue background for the dropdown on Android
+//      borderRadius: 8,
+//    },
+//    picker: {
+//      color: 'white',                 // Sets text color inside Picker
+//      backgroundColor: 'blue',        // Apply background color for Android
+//    }
+//  });
 
-const styles = StyleSheet.create({
-   pickerContainer: {
-     backgroundColor: 'blue',        // Blue background for the dropdown on Android
-     borderRadius: 8,
-   },
-   picker: {
-     color: 'white',                 // Sets text color inside Picker
-     backgroundColor: 'blue',        // Apply background color for Android
-   }
- });
-
-
-
-export default UserInfo
+export default UserInfo;

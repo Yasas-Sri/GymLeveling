@@ -1,24 +1,24 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { StyleSheet, View, Text, Alert, FlatList, Modal, Button, TextInput } from 'react-native';
-import { Agenda, CalendarUtils } from 'react-native-calendars';
-import testIDs from './testIDs';
+import React, { useState, useCallback, useMemo } from "react";
+import { StyleSheet, View, Text, Modal, Button, TextInput } from "react-native";
+import { Agenda, CalendarUtils } from "react-native-calendars";
+import testIDs from "./testIDs";
 
 const getCurrentDate = () => {
   const date = new Date();
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
 
 const CalendarScreen = () => {
   const [selected, setSelected] = useState(getCurrentDate());
   const [items, setItems] = useState({
-    [getCurrentDate()]: [{ name: 'Meeting at 10am', height: 80 }],
-    '2024-09-10': [{ name: 'Doctor Appointment', height: 100 }],
+    [getCurrentDate()]: [{ name: "Meeting at 10am", height: 80 }],
+    "2024-09-10": [{ name: "Doctor Appointment", height: 100 }],
   });
 
-  const [newEvent, setNewEvent] = useState('');
+  const [newEvent, setNewEvent] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const loadItems = (day) => {
@@ -56,7 +56,7 @@ const CalendarScreen = () => {
         <Text>{item.name}</Text>
       </View>
     ),
-    []
+    [],
   );
 
   // Open the modal to add a new event
@@ -74,8 +74,8 @@ const CalendarScreen = () => {
       }, {}),
       [selected]: {
         selected: true,
-        selectedColor: 'orange',
-        selectedTextColor: 'red',
+        selectedColor: "orange",
+        selectedTextColor: "red",
       },
     };
   }, [items, selected]);
@@ -85,18 +85,18 @@ const CalendarScreen = () => {
       <Agenda
         testID={testIDs.calendars.FIRST}
         items={items}
-        minDate={'2020-01-01'}
-        maxDate={'2025-12-31'}
+        minDate={"2020-01-01"}
+        maxDate={"2025-12-31"}
         loadItemsForMonth={loadItems}
         selected={selected}
         onDayPress={(day) => openAddEventModal(day)}
         renderItem={renderItem}
         markedDates={markedDates}
         theme={{
-          agendaDayTextColor: 'blue',
-          agendaDayNumColor: 'red',
-          agendaTodayColor: 'green',
-          agendaKnobColor: 'blue',
+          agendaDayTextColor: "blue",
+          agendaDayNumColor: "red",
+          agendaTodayColor: "green",
+          agendaKnobColor: "blue",
         }}
       />
 
@@ -120,7 +120,7 @@ const CalendarScreen = () => {
               title="Add Event"
               onPress={() => {
                 handleAddEvent(selected, newEvent);
-                setNewEvent('');
+                setNewEvent("");
                 setModalVisible(false);
               }}
             />
@@ -136,7 +136,7 @@ export default CalendarScreen;
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
@@ -144,24 +144,24 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     padding: 10,
     marginVertical: 10,
-    width: '100%',
+    width: "100%",
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {
-    width: '80%',
-    backgroundColor: 'white',
+    width: "80%",
+    backgroundColor: "white",
     borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,

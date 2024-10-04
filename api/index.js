@@ -1,69 +1,62 @@
 export const api = {
-     post: async (url, body) => {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-          })
-
-        if (!response.ok) {
-          throw new Error(response);
-        }
-
-        
-    },
-
-    get: async (url) => {
-      const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-  
-      if (!response.ok) {
-        throw new Error(response);
-      }
-
-      const data = await response.json();
-      return data;
-
-  },
-
-  put: async (url, body) => {
+  post: async (url, body) => {
     const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
       throw new Error(response);
     }
-},
+  },
 
-delete: async (url,body) => {
-  const response = await fetch(url, {
-      method: 'DELETE',
+  get: async (url) => {
+    const response = await fetch(url, {
+      method: "GET",
       headers: {
-          'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(response);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  put: async (url, body) => {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-  });
+    });
 
-  if (!response.ok) {
-    throw new Error(response);
-  }
+    if (!response.ok) {
+      throw new Error(response);
+    }
+  },
 
+  delete: async (url, body) => {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
 
-  const data = await response.json();
-      return data;
-}
-   
+    if (!response.ok) {
+      throw new Error(response);
+    }
 
-
+    const data = await response.json();
+    return data;
+  },
 };

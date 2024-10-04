@@ -1,22 +1,12 @@
-import { View, Text } from 'react-native'
-import {Stack,SplashScreen ,Link,Redirect,router} from 'expo-router';
-import { PaperProvider } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import Exercises from './(tabs)/Workout/Exercises';
-import Preset from './(tabs)/Workout/Preset';
-import {useFonts} from 'expo-font'
-import { useEffect,useState } from "react";
-import { supabase } from '../lib/supabase'
-import SignInStack from './../components/SignInStack';
-import SignOutStack from './../components/SignOutStack';
-
+//import { View, Text } from 'react-native'
+import { Stack, SplashScreen } from "expo-router";
+import { useFonts } from "expo-font";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 SplashScreen.preventAutoHideAsync();
 
-
-
 const RootLayout = () => {
-
   const [session, setSession] = useState(null);
 
   const [fontsLoaded, error] = useFonts({
@@ -39,17 +29,16 @@ const RootLayout = () => {
     }
   }, [fontsLoaded, error]);
 
-
   // Track the auth state
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (event === 'SIGNED_IN') {
-          setSession(session)
-        } else  {
-          setSession(null)
+        if (event === "SIGNED_IN") {
+          setSession(session);
+        } else {
+          setSession(null);
         }
-      }
+      },
     );
 
     // Clean up the listener when the component unmounts
@@ -59,9 +48,6 @@ const RootLayout = () => {
     };
   }, []);
 
-
-
-
   // useEffect(() => {
   //   if (session) {
   //     router.replace('./(tabs)/home'); // Replace the current stack
@@ -70,12 +56,6 @@ const RootLayout = () => {
   //   }
   // }, [session]);
 
-
-
-
-
-
-  
   if (!fontsLoaded) {
     return null;
   }
@@ -84,15 +64,9 @@ const RootLayout = () => {
     return null;
   }
 
-
-
-
-
   return (
-   
-     <>
-    
-{/* {session && 
+    <>
+      {/* {session && 
      <SignInStack />
       }
   
@@ -100,22 +74,13 @@ const RootLayout = () => {
    {!session && 
        <SignOutStack />
      } */}
-    
-    <Stack>
-        <Stack.Screen name="index" options={{headerShown:false}} />
-         <Stack.Screen name="(auth)" options={{ headerShown:false}}/>
-          <Stack.Screen name="(tabs)" options={{ headerShown:false}}/>
 
-         
-
-      </Stack> 
-
-     
-   
-
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
     </>
-
-
-  )
-}
-export default RootLayout
+  );
+};
+export default RootLayout;

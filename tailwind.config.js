@@ -3,15 +3,15 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-       colors:{
-           primary:'#0A0A2C',
-           secondary:'#FF7E06',
-           lightB:'rgba(17,17,79,0.5)',
-           borderB:'#363670',
-           cardB:'#0f0f36'
-       },
+      colors: {
+        primary: "#0A0A2C",
+        secondary: "#FF7E06",
+        lightB: "rgba(17,17,79,0.5)",
+        borderB: "#363670",
+        cardB: "#0f0f36",
+      },
 
-       fontFamily: {
+      fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],
         pextralight: ["Poppins-ExtraLight", "sans-serif"],
         plight: ["Poppins-Light", "sans-serif"],
@@ -22,10 +22,7 @@ module.exports = {
         pextrabold: ["Poppins-ExtraBold", "sans-serif"],
         pblack: ["Poppins-Black", "sans-serif"],
       },
-
-
     },
   },
   plugins: [],
-}
-
+};
