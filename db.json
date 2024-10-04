@@ -186,7 +186,8 @@
     "bodyPart": "chest",
     "equipment": "barbell",
     "name": "barbell bench press",
-    "target": "pectorals"
+    "target": "pectorals",
+    "description": "Lie flat on a bench with your feet firmly on the ground. Grip the barbell slightly wider than shoulder-width apart. Lower the barbell to your chest slowly, then press it back up until your arms are fully extended."
   },
   {
     "id": "0022",
@@ -194,7 +195,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell bench squat",
-    "target": "quads"
+    "target": "quads",
+    "description": "Stand with your feet shoulder-width apart and hold the barbell across your upper back. Squat down until your thighs are parallel to the floor. Press back up through your heels, keeping your chest upright and core tight."
   },
   {
     "id": "0023",
@@ -202,7 +204,8 @@
     "bodyPart": "back",
     "equipment": "barbell",
     "name": "barbell bent over row",
-    "target": "upper back"
+    "target": "upper back",
+    "description": "Stand with your feet shoulder-width apart and knees slightly bent. Hold the barbell with an overhand grip, hinge forward at your hips, and row the barbell toward your lower chest. Keep your back straight and elbows close to your body."
   },
   {
     "id": "0024",
@@ -210,7 +213,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell clean and press",
-    "target": "quads"
+    "target": "quads",
+    "description": "Start by standing with your feet shoulder-width apart, holding the barbell at your thighs. Explosively pull the barbell to shoulder height, then press it overhead. Lower the barbell back to your shoulders, then to the starting position."
   },
   {
     "id": "0025",
@@ -218,7 +222,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell clean-grip front squat",
-    "target": "glutes"
+    "target": "glutes",
+    "description": "Hold the barbell across your chest with your elbows high, using a clean grip. Lower into a squat by pushing your hips back and bending your knees. Keep your chest up and back straight as you drive back up to the starting position."
   },
   {
     "id": "0026",
@@ -226,7 +231,8 @@
     "bodyPart": "upper arms",
     "equipment": "barbell",
     "name": "barbell close-grip bench press",
-    "target": "triceps"
+    "target": "triceps",
+    "description": "Lie flat on a bench with a narrow grip on the barbell. Lower the barbell slowly to your chest while keeping your elbows close to your sides. Press the barbell back up, fully extending your arms to engage your triceps."
   },
   {
     "id": "0027",
@@ -234,7 +240,8 @@
     "bodyPart": "upper arms",
     "equipment": "barbell",
     "name": "barbell curl",
-    "target": "biceps"
+    "target": "biceps",
+    "description": "Stand with your feet shoulder-width apart and hold the barbell with an underhand grip. Curl the barbell toward your chest, keeping your elbows close to your torso. Lower the barbell back down with control to the starting position."
   },
   {
     "id": "0028",
@@ -242,7 +249,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell deadlift",
-    "target": "glutes"
+    "target": "glutes",
+    "description": "Stand with your feet hip-width apart and grip the barbell with both hands. Hinge at your hips and lower the bar to mid-shin. Drive through your heels and extend your hips to stand tall, keeping the bar close to your body."
   },
   {
     "id": "0029",
@@ -250,7 +258,8 @@
     "bodyPart": "chest",
     "equipment": "barbell",
     "name": "barbell decline bench press",
-    "target": "pectorals"
+    "target": "pectorals",
+    "description": "Lie on a decline bench with your feet secured. Grip the barbell slightly wider than shoulder-width apart and lower it toward your chest. Press the barbell back up while keeping your elbows slightly flared to target your chest muscles."
   },
   {
     "id": "0030",
@@ -258,7 +267,8 @@
     "bodyPart": "back",
     "equipment": "barbell",
     "name": "barbell decline bent arm pullover",
-    "target": "lats"
+    "target": "lats",
+    "description": "Lie on a decline bench with the barbell extended over your chest. Lower the barbell behind your head while keeping your arms bent. Pull the barbell back up to the starting position by engaging your lats and upper back."
   },
   {
     "id": "0031",
@@ -266,7 +276,8 @@
     "bodyPart": "upper arms",
     "equipment": "barbell",
     "name": "barbell decline close grip to skull press",
-    "target": "triceps"
+    "target": "triceps",
+    "description": "Lie on a decline bench and hold the barbell with a close grip. Lower the barbell toward your forehead by bending your elbows. Press the barbell back up using your triceps, keeping your elbows tucked in throughout the movement."
   },
   {
     "id": "0032",
@@ -274,7 +285,8 @@
     "bodyPart": "chest",
     "equipment": "barbell",
     "name": "barbell decline wide-grip press",
-    "target": "pectorals"
+    "target": "pectorals",
+    "description": "Lie on a decline bench with a wide grip on the barbell. Lower the barbell slowly toward your lower chest, flaring your elbows out to engage your pectorals. Press the barbell back up, focusing on squeezing your chest muscles at the top."
   },
   {
     "id": "0033",
@@ -282,7 +294,8 @@
     "bodyPart": "back",
     "equipment": "barbell",
     "name": "barbell decline wide-grip pullover",
-    "target": "lats"
+    "target": "lats",
+    "description": "Lie on a decline bench and hold the barbell with a wide grip. Lower the barbell behind your head while keeping your arms slightly bent. Engage your lats and pull the barbell back to the starting position over your chest."
   },
   {
     "id": "0034",
@@ -290,7 +303,8 @@
     "bodyPart": "upper arms",
     "equipment": "barbell",
     "name": "barbell drag curl",
-    "target": "biceps"
+    "target": "biceps",
+    "description": "Stand with your feet shoulder-width apart, holding the barbell with an underhand grip. Instead of curling the barbell directly, drag it along your torso, focusing on squeezing your biceps throughout the movement. Lower the barbell back down slowly."
   },
   {
     "id": "0035",
@@ -298,7 +312,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell front chest squat",
-    "target": "glutes"
+    "target": "glutes",
+    "description": "Hold the barbell across the front of your shoulders with your elbows raised high. Squat down while keeping your torso upright and core tight. Drive through your heels to return to a standing position, engaging your glutes throughout."
   },
   {
     "id": "0036",
@@ -306,7 +321,8 @@
     "bodyPart": "chest",
     "equipment": "barbell",
     "name": "barbell front raise and pullover",
-    "target": "pectorals"
+    "target": "pectorals",
+    "description": "Stand with your feet hip-width apart and hold the barbell in front of you. Raise the barbell overhead, then lower it behind your head in a pullover motion. Return the barbell to the front and repeat, focusing on chest activation throughout."
   },
   {
     "id": "0037",
@@ -314,7 +330,8 @@
     "bodyPart": "shoulders",
     "equipment": "barbell",
     "name": "barbell front raise",
-    "target": "delts"
+    "target": "delts",
+    "description": "Stand with your feet shoulder-width apart and hold the barbell in front of your thighs. Raise the barbell to shoulder height while keeping your arms straight. Lower the barbell slowly to the starting position, focusing on your deltoids."
   },
   {
     "id": "0038",
@@ -322,7 +339,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell front squat",
-    "target": "glutes"
+    "target": "glutes",
+    "description": "Hold the barbell across your front shoulders with your elbows high. Squat down by bending at the knees and hips, keeping your torso upright. Drive back up through your heels to the standing position, engaging your glutes and quads."
   },
   {
     "id": "0039",
@@ -330,7 +348,8 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell full squat",
-    "target": "glutes"
+    "target": "glutes",
+    "description": "Stand with your feet shoulder-width apart and hold the barbell across your back. Squat down until your thighs are below parallel to the floor. Press back up to the starting position, keeping your core tight and chest lifted throughout the movement."
   },
   {
     "id": "0040",
@@ -338,8 +357,10 @@
     "bodyPart": "upper legs",
     "equipment": "barbell",
     "name": "barbell good morning",
-    "target": "hamstrings"
+    "target": "hamstrings",
+    "description": "Stand with the barbell across your upper back and feet shoulder-width apart. Hinge at your hips and lower your torso while keeping your back flat. Return to the starting position by extending your hips and squeezing your hamstrings and glutes."
   },
+
   {
     "id": "0041",
     "gifUrl": "https://res.cloudinary.com/devthakur/image/upload/v1686929351/Exercises_Gif/gif_image_0041.gif",
@@ -10613,8 +10634,3 @@
     "target": "biceps"
   }
 ]
-
-
-
-
-

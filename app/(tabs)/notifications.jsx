@@ -34,7 +34,7 @@
 //   }
 
 //   return (
-//     <View className="flex-1 justify-start items-center mt-10"> 
+//     <View className="flex-1 justify-start items-center mt-10">
 //       <Text className="text-2xl">{data ? data.message : 'No data available'}</Text>
 //     </View>
 //   );
@@ -42,78 +42,55 @@
 
 // export default notifications;
 
+import React from "react";
 
-import React, { useState } from 'react';
-import {  Button } from 'react-native';
-import useStore from '../../store';
+import useStore from "../../store";
 
+import { View } from "react-native";
 
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+//import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+const notifications = () => {
+  //   const [responseMessage, setResponseMessage] = useState('');
 
-  const notifications = () => {
-//   const [responseMessage, setResponseMessage] = useState('');
+  //   const sendData = async () => {
+  //     try {
+  //       const response = await fetch('http://192.168.8.125:3000/api/dataRN', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           name: 'John Doe',
+  //           email: 'john.doe@example.com',
+  //         }),
+  //       });
 
-//   const sendData = async () => {
-//     try {
-//       const response = await fetch('http://192.168.8.125:3000/api/dataRN', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           name: 'John Doe',
-//           email: 'john.doe@example.com',
-//         }),
-//       });
+  //       const data = await response.json();
+  //       setResponseMessage(data.message);
+  //     } catch (error) {
+  //       setResponseMessage('Error: ' + error.message);
+  //     }
+  //   };
 
-//       const data = await response.json();
-//       setResponseMessage(data.message);
-//     } catch (error) {
-//       setResponseMessage('Error: ' + error.message);
-//     }
-//   };
- 
+  // store starts here
+  // const jsonData = useStore((state) => state.jsonData);
 
-// store starts here
-  const jsonData = useStore((state) => state.jsonData);
-    
   return (
     <View className="flex-1 justify-start items-center mt-10">
       {/* <Button title="Send Data" onPress={sendData} /> */}
       {/* <Text>{responseMessage}</Text> */}
-       {/* <Text>
+      {/* <Text>
        
        {jsonData ? JSON.stringify(jsonData, null, 2) : 'No data available'}
         </Text> 
       */}
-
     </View>
   );
 };
 // store ends
 
-
-
-
-
-
-  
-
-
-
 export default notifications;
-
-
-
 
 ///
 // map = {};
