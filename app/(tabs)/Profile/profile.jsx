@@ -6,7 +6,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import Barchart from "../../components/Barchart";
+import Barchart from "../../../components/Barchart";
 
 const Profile = () => {
   return (
