@@ -5,8 +5,12 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  StyleSheet,
+  Modal,
+  TouchableWithoutFeedback,
+  Button,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState, useFocusEffect, useCallback } from "react";
 import {
   FontAwesome,
   FontAwesome5,
@@ -17,35 +21,67 @@ import { router } from "expo-router";
 //import { s, vs, ms } from 'react-native-size-matters';
 import useStore from "../../../store";
 import CustomButton from "../../../components/CustomButton";
+import { getRoutine, deleteRoutine } from "../../../api/exerciseRoutines";
 
 const Preset = () => {
   const saveRoutines = useStore((state) => state.saveRoutines);
   const routineData = useStore((state) => state.routineList);
+  const [modalVisible, setModalVisible] = useState("false"); // delete routines
+  const [routineId, setroutineId] = useState();
+  // const { addRoutine } = useStore.getState();
+  const addRoutine = useStore((state) => state.addRoutine);
 
-  // useEffect(() => {
-  //   // You can add logic here if needed to fetch or update `saveRoutines`
-  //   // For example, fetching from a server or local storage.
+  console.log(saveRoutines);
 
-  //   renderItem({saveRoutines});
-  // }, []);
+  const routineStart = ({ item }) => {};
 
-  // const handleClick = () =>{
-
-  //   router.push('/userPhoto')
-  // }
-
-  // console.log(saveRoutines);
+  const deleteroutines = async ({ routineId }) => {
+    await deleteRoutine({ routineId });
+    // const callbacks = {
+    //   onSuccess: getRoutine(addRoutine),
+    // };
+    getRoutine();
+    //addRoutine([]);
+    setModalVisible(false);
+  };
 
   const renderItem = ({ item }) => {
-    const routine = routineData.find((ex) => item.routineId === ex.id);
-
+    //console.log(item.id);
     return (
       <View className=" bg-cardB border-borderB border p-4 rounded-lg mt-1 mb-10 w-full">
-        <Text className="text-white text-lg ">{routine.title}</Text>
-
+        <View className="justify-between flex-row">
+          <View className="flex-row gap-x-2">
+            <Text className="text-white text-lg ">{item.title}</Text>
+            {/* <Text className="text-white text-lg ">
+              {item.routine_exercises}
+            </Text> */}
+            <MaterialCommunityIcons name="dumbbell" size={30} color="grey" />
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(true);
+              setroutineId(item.id);
+            }}
+          >
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={30}
+              color="white"
+            />
+          </TouchableOpacity>
+        </View>
         <CustomButton
           title="Start Routine"
-          // handlePress={handleSave}
+          handlePress={() =>
+            router.push({
+              pathname: "/Workout/StartRoutine",
+              params: {
+                routine_exercises: JSON.stringify(item.routine_exercises), //`${item.routine_exercises}`,
+                title: `${item.title}`,
+                routineId: `${item.id}`,
+              },
+            })
+          }
           containerStyles="mt-7"
           //isLoading={loading}
         />
@@ -106,18 +142,60 @@ const Preset = () => {
             {saveRoutines && (
               <FlatList
                 data={saveRoutines}
-                keyExtractor={(item, index) =>
-                  item.id ? item.id.toString() : index.toString()
-                }
+                // keyExtractor={(item, index) =>
+                //   item.id ? item.id.toString() : index.toString()
+                // }
+                //keyExtractor={(item) => item.id}
                 renderItem={renderItem}
                 scrollEnabled={false}
               />
             )}
           </View>
         </View>
+        <Modal visible={modalVisible} transparent={true} animationType="slide">
+          <TouchableWithoutFeedback onPress={() => setModalVisible("false")}>
+            <View style={styles.modalContainer2}>
+              <TouchableWithoutFeedback>
+                <View style={styles.modalContent2}>
+                  <View className="mb-2     w-full   ">
+                    <Button
+                      title="Delete Routine"
+                      color="#0f0f36"
+                      onPress={() => deleteroutines({ routineId })}
+                    />
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default Preset;
+
+const styles = StyleSheet.create({
+  modalContainer2: {
+    flex: 1,
+    // justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+    width: "100%",
+  },
+  modalContent2: {
+    // width: 300,
+    width: "100%",
+    padding: 20,
+
+    backgroundColor: "white",
+    //borderRadius: 50,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: "15%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

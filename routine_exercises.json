@@ -1,0 +1,638 @@
+[
+  {
+    "id": 1,
+    "sets": "3",
+    "exercise_id_fk": "0028",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 2,
+    "sets": "3",
+    "exercise_id_fk": "0043",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 3,
+    "sets": "3",
+    "exercise_id_fk": "0045",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 4,
+    "sets": "3",
+    "exercise_id_fk": "0364",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 5,
+    "sets": "3",
+    "exercise_id_fk": "0289",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 6,
+    "sets": "3",
+    "exercise_id_fk": "0373",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 7,
+    "sets": "3",
+    "exercise_id_fk": "0744",
+    "routine_id_fk": "241a457b-1b4b-42e4-ae20-1d28b7b35150"
+  },
+  {
+    "id": 8,
+    "sets": "3",
+    "exercise_id_fk": "0039",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 9,
+    "sets": "3",
+    "exercise_id_fk": "0021",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 10,
+    "sets": "3",
+    "exercise_id_fk": "0537",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 11,
+    "sets": "3",
+    "exercise_id_fk": "0494",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 12,
+    "sets": "3",
+    "exercise_id_fk": "0145",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 13,
+    "sets": "3",
+    "exercise_id_fk": "0379",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 14,
+    "sets": "3",
+    "exercise_id_fk": "0963",
+    "routine_id_fk": "99ce312b-5b50-435a-97af-bc68bae08400"
+  },
+  {
+    "id": 15,
+    "sets": "3",
+    "exercise_id_fk": "1088",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 16,
+    "sets": "3",
+    "exercise_id_fk": "0367",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 17,
+    "sets": "3",
+    "exercise_id_fk": "0291",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 18,
+    "sets": "3",
+    "exercise_id_fk": "0028",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 19,
+    "sets": "3",
+    "exercise_id_fk": "0045",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 20,
+    "sets": "3",
+    "exercise_id_fk": "0209",
+    "routine_id_fk": "56fd9bd0-4c61-48e0-bacf-e549d6940c28"
+  },
+  {
+    "id": 21,
+    "sets": "3",
+    "exercise_id_fk": "0043",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 22,
+    "sets": "3",
+    "exercise_id_fk": "0045",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 23,
+    "sets": "3",
+    "exercise_id_fk": "0379",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 24,
+    "sets": "3",
+    "exercise_id_fk": "0537",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 25,
+    "sets": "3",
+    "exercise_id_fk": "0027",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 26,
+    "sets": "3",
+    "exercise_id_fk": "0130",
+    "routine_id_fk": "e6f854a0-d6a2-49a6-b054-5b5bd293afd9"
+  },
+  {
+    "id": 27,
+    "sets": "3",
+    "exercise_id_fk": "0915",
+    "routine_id_fk": "4afac5a3-13af-4be8-80b3-6b82fa9e71fd"
+  },
+  {
+    "id": 28,
+    "sets": "3",
+    "exercise_id_fk": "0080",
+    "routine_id_fk": "4afac5a3-13af-4be8-80b3-6b82fa9e71fd"
+  },
+  {
+    "id": 29,
+    "sets": "3",
+    "exercise_id_fk": "0364",
+    "routine_id_fk": "4afac5a3-13af-4be8-80b3-6b82fa9e71fd"
+  },
+  {
+    "id": 30,
+    "sets": "3",
+    "exercise_id_fk": "1211",
+    "routine_id_fk": "4afac5a3-13af-4be8-80b3-6b82fa9e71fd"
+  },
+  {
+    "id": 31,
+    "sets": "3",
+    "exercise_id_fk": "0514",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 32,
+    "sets": "3",
+    "exercise_id_fk": "0021",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 33,
+    "sets": "3",
+    "exercise_id_fk": "0043",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 34,
+    "sets": "3",
+    "exercise_id_fk": "0268",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 35,
+    "sets": "3",
+    "exercise_id_fk": "0553",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 36,
+    "sets": "3",
+    "exercise_id_fk": "0140",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 37,
+    "sets": "3",
+    "exercise_id_fk": "0326",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 38,
+    "sets": "3",
+    "exercise_id_fk": "0176",
+    "routine_id_fk": "cd2c8401-19c5-4ee1-92b7-a3e6ad61daf6"
+  },
+  {
+    "id": 39,
+    "sets": "3",
+    "exercise_id_fk": "0039",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 40,
+    "sets": "3",
+    "exercise_id_fk": "0028",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 41,
+    "sets": "3",
+    "exercise_id_fk": "0581",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 42,
+    "sets": "3",
+    "exercise_id_fk": "0513",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 43,
+    "sets": "3",
+    "exercise_id_fk": "0502",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 44,
+    "sets": "3",
+    "exercise_id_fk": "0681",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 45,
+    "sets": "3",
+    "exercise_id_fk": "0289",
+    "routine_id_fk": "e2800c9d-e348-4813-aab4-0ab83a64835a"
+  },
+  {
+    "id": 46,
+    "sets": "3",
+    "exercise_id_fk": "0021",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 47,
+    "sets": "3",
+    "exercise_id_fk": "0314",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 48,
+    "sets": "3",
+    "exercise_id_fk": "0130",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 49,
+    "sets": "3",
+    "exercise_id_fk": "1125",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 50,
+    "sets": "3",
+    "exercise_id_fk": "0136",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 51,
+    "sets": "3",
+    "exercise_id_fk": "0249",
+    "routine_id_fk": "5f0b843c-e313-4695-aced-821e30d49150"
+  },
+  {
+    "id": 52,
+    "sets": "3",
+    "exercise_id_fk": "0028",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 53,
+    "sets": "3",
+    "exercise_id_fk": "0282",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 54,
+    "sets": "3",
+    "exercise_id_fk": "0068",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 55,
+    "sets": "3",
+    "exercise_id_fk": "0468",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 56,
+    "sets": "3",
+    "exercise_id_fk": "0800",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 57,
+    "sets": "3",
+    "exercise_id_fk": "0158",
+    "routine_id_fk": "7247cd7d-bdd9-4fa8-9e97-cf29e9a9251e"
+  },
+  {
+    "id": 58,
+    "sets": "3",
+    "exercise_id_fk": "0039",
+    "routine_id_fk": "eb2d1300-4ce1-482e-ac34-553a801e1fbb"
+  },
+  {
+    "id": 59,
+    "sets": "3",
+    "exercise_id_fk": "0571",
+    "routine_id_fk": "eb2d1300-4ce1-482e-ac34-553a801e1fbb"
+  },
+  {
+    "id": 60,
+    "sets": "3",
+    "exercise_id_fk": "0291",
+    "routine_id_fk": "eb2d1300-4ce1-482e-ac34-553a801e1fbb"
+  },
+  {
+    "id": 61,
+    "sets": "3",
+    "exercise_id_fk": "0513",
+    "routine_id_fk": "eb2d1300-4ce1-482e-ac34-553a801e1fbb"
+  },
+  {
+    "id": 62,
+    "sets": "3",
+    "exercise_id_fk": "0255",
+    "routine_id_fk": "eb2d1300-4ce1-482e-ac34-553a801e1fbb"
+  },
+  {
+    "id": 63,
+    "sets": "3",
+    "exercise_id_fk": "1185",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 64,
+    "sets": "3",
+    "exercise_id_fk": "0786",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 65,
+    "sets": "3",
+    "exercise_id_fk": "1076",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 66,
+    "sets": "3",
+    "exercise_id_fk": "0801",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 67,
+    "sets": "3",
+    "exercise_id_fk": "0008",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 68,
+    "sets": "3",
+    "exercise_id_fk": "1274",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 69,
+    "sets": "3",
+    "exercise_id_fk": "0705",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 70,
+    "sets": "3",
+    "exercise_id_fk": "0655",
+    "routine_id_fk": "c455f54d-0388-4f65-9ca1-09d347d775ab"
+  },
+  {
+    "id": 71,
+    "sets": "3",
+    "exercise_id_fk": "0423",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 72,
+    "sets": "3",
+    "exercise_id_fk": "0781",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 73,
+    "sets": "3",
+    "exercise_id_fk": "0223",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 74,
+    "sets": "3",
+    "exercise_id_fk": "0635",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 75,
+    "sets": "3",
+    "exercise_id_fk": "0436",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 76,
+    "sets": "3",
+    "exercise_id_fk": "0858",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 77,
+    "sets": "3",
+    "exercise_id_fk": "1290",
+    "routine_id_fk": "5b74c0cc-429b-4ff4-a19d-ec448b09393e"
+  },
+  {
+    "id": 78,
+    "sets": "3",
+    "exercise_id_fk": "0240",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 79,
+    "sets": "3",
+    "exercise_id_fk": "0360",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 80,
+    "sets": "3",
+    "exercise_id_fk": "0367",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 81,
+    "sets": "3",
+    "exercise_id_fk": "0289",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 82,
+    "sets": "3",
+    "exercise_id_fk": "1078",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 83,
+    "sets": "3",
+    "exercise_id_fk": "0291",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 84,
+    "sets": "3",
+    "exercise_id_fk": "0852",
+    "routine_id_fk": "0937263c-9c7e-4f7f-9533-c3aee7deca38"
+  },
+  {
+    "id": 85,
+    "sets": "3",
+    "exercise_id_fk": "1009",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 86,
+    "sets": "3",
+    "exercise_id_fk": "0248",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 87,
+    "sets": "3",
+    "exercise_id_fk": "0368",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 88,
+    "sets": "3",
+    "exercise_id_fk": "0291",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 89,
+    "sets": "3",
+    "exercise_id_fk": "1074",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 90,
+    "sets": "3",
+    "exercise_id_fk": "0363",
+    "routine_id_fk": "198ce2b6-ab59-4715-beb6-cc02429c6f7c"
+  },
+  {
+    "id": 91,
+    "sets": "3",
+    "exercise_id_fk": "0786",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 92,
+    "sets": "3",
+    "exercise_id_fk": "0004",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 93,
+    "sets": "3",
+    "exercise_id_fk": "1139",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 94,
+    "sets": "3",
+    "exercise_id_fk": "0435",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 95,
+    "sets": "3",
+    "exercise_id_fk": "0408",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 96,
+    "sets": "3",
+    "exercise_id_fk": "0529",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 97,
+    "sets": "3",
+    "exercise_id_fk": "0238",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 98,
+    "sets": "3",
+    "exercise_id_fk": "0424",
+    "routine_id_fk": "2eb2f98e-d166-4779-9720-9ae5aa5ed14d"
+  },
+  {
+    "id": 99,
+    "sets": "3",
+    "exercise_id_fk": "0227",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 100,
+    "sets": "3",
+    "exercise_id_fk": "0236",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 101,
+    "sets": "3",
+    "exercise_id_fk": "0226",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 102,
+    "sets": "3",
+    "exercise_id_fk": "0436",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 103,
+    "sets": "3",
+    "exercise_id_fk": "1290",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 104,
+    "sets": "3",
+    "exercise_id_fk": "0634",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 105,
+    "sets": "3",
+    "exercise_id_fk": "0001",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  },
+  {
+    "id": 106,
+    "sets": "3",
+    "exercise_id_fk": "0003",
+    "routine_id_fk": "5a0cad27-41bd-423c-a153-37cc01e73950"
+  }
+]
