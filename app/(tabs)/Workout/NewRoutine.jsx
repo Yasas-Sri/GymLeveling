@@ -9,13 +9,16 @@ import {
   StyleSheet,
   Button,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import RNButton from '../../../components/RNButton'
 import CustomButton from "../../../components/CustomButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import WeightLog from "../../../components/WeightLog";
 import { router } from "expo-router";
+import { getRoutine, saveRoutine } from "../../../api/exerciseRoutines";
+import useStore from "../../../store";
 
 const NewRoutine = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,30 +26,54 @@ const NewRoutine = () => {
   const [modalVisible2, setModalVisible2] = useState(-1);
   const [exercises, setExercises] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [title, setTitle] = useState();
+
+  const { addExerciseDetails, removeExercise } = useStore();
+  const exercisesdb = useStore((state) => state.exerciseMap);
+  const addedExercises = useStore((state) => state.addedExercises);
+  //const deleteExerciseFromStore = useStore((state) => state.deleteExercise);
+  //const { addRoutine } = useStore.getState();
+  const addRoutine = useStore((state) => state.addRoutine);
+
+  useEffect(() => {
+    setExercises(addedExercises);
+  }, [addedExercises]);
 
   const addExercises = () => {
-    setModalVisible(true);
+    //setModalVisible(true);
+    router.push("/Workout/AddExercises");
   };
 
-  const saveExercise = () => {
-    if (inputText.trim()) {
-      // Only add if there's text in the input
-      setExercises((prevExercises) => [...prevExercises, inputText]);
-    }
-    setModalVisible(false);
-    setInputText("");
-  };
+  // const saveExercise = () => {
+  //   if (inputText.trim()) {
+  //     // Only add if there's text in the input
+  //     setExercises((prevExercises) => [...prevExercises, inputText]);
+  //   }
+  //   setModalVisible(false);
+  //   setInputText("");
+  // };
 
   const deleteExercise = (index) => {
     setExercises((prevExercises) =>
       prevExercises.filter((_, i) => i !== index),
     );
-
+    //deleteExerciseFromStore(index);
+    removeExercise(index);
     setModalVisible2(-1);
   };
 
   const cancelRoutine = () => {
     setModalVisible1(true);
+  };
+
+  const saveRoutines = async () => {
+    // const callbacks = {
+    //   onSuccess: getRoutine(addRoutine),
+    // };
+    await saveRoutine({ title, exercises });
+    getRoutine();
+    // console.log(exercises);
+    // addRoutine(["dsdsdseeeeeee"]);
   };
 
   return (
@@ -79,7 +106,7 @@ const NewRoutine = () => {
          //S handlePress={() => setActiveComponent('Exercises')}
         /> */}
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={saveRoutines}>
             <View className=" bg-secondary border-borderB border p-4  rounded-xl mr-2 w-24">
               <Text className=" justify-center self-center text-white">
                 Save
@@ -89,11 +116,15 @@ const NewRoutine = () => {
         </View>
 
         <View className=" space-y-2 mt-7 w-full  px-4 ">
-          <TextInput
-            className="flex-1 text-white text-base font-psemibold bg-primary"
-            placeholder="Routine title"
-            placeholderTextColor="#808080"
-          />
+          <View className="flex-row justify-start">
+            <TextInput
+              className="flex-1 text-white text-base font-psemibold bg-primary"
+              placeholder="Routine title"
+              placeholderTextColor="#808080"
+              onChangeText={setTitle}
+            />
+            <MaterialCommunityIcons name="lead-pencil" size={30} color="grey" />
+          </View>
         </View>
 
         {!exercises.length && (
@@ -116,10 +147,18 @@ const NewRoutine = () => {
                 className=" justify-between m-2 p-2  rounded-lg border-borderB border bg-cardB"
               >
                 <View className="flex-row ">
+                  <View className="h-14 bg-white rounded-full w-14 mb-5 overflow-hidden ">
+                    <Image
+                      source={{ uri: exercisesdb[exercise.id].gifUrl }}
+                      className="w-14 h-14"
+                    />
+                  </View>
                   <Text className="text-white flex-1 space-y-2  px-4 m-2 font-pmedium">
-                    {exercise}
+                    {exercisesdb[exercise.id].name}
                   </Text>
-                  <TouchableOpacity onPress={() => setModalVisible2(index)}>
+                  <TouchableOpacity
+                    onPress={() => setModalVisible2(exercise.id)}
+                  >
                     <MaterialCommunityIcons
                       name="dots-vertical"
                       size={30}
@@ -128,7 +167,7 @@ const NewRoutine = () => {
                   </TouchableOpacity>
                 </View>
 
-                <WeightLog />
+                <WeightLog exerciseId={exercise.id} flag={false} />
               </View>
             ))}
           </View>
@@ -143,7 +182,7 @@ const NewRoutine = () => {
         </View>
 
         {/* Modal adding exercises */}
-        <Modal visible={modalVisible} transparent={true} animationType="slide">
+        {/* <Modal visible={modalVisible} transparent={true} animationType="slide">
           <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
             <View style={styles.modalContainer}>
               <TouchableWithoutFeedback>
@@ -171,7 +210,7 @@ const NewRoutine = () => {
               </TouchableWithoutFeedback>
             </View>
           </TouchableWithoutFeedback>
-        </Modal>
+        </Modal> */}
 
         {/* modal for discard the routine           */}
         <Modal visible={modalVisible1} transparent={true} animationType="slide">

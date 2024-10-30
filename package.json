@@ -48,7 +48,9 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.1.0",
     "undefined": "expo-auth-session/build/QueryParams",
-    "zustand": "^5.0.0-rc.2"
+    "uuid": "^10.0.0",
+    "zustand": "^5.0.0-rc.2",
+    "expo-checkbox": "~3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

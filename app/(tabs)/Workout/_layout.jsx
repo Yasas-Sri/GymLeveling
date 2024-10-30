@@ -53,6 +53,20 @@ const WorkoutStack = () => {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="AddExercises"
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="StartRoutine"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
 
       <StatusBar backgroundColor="#0A0A2C" style="dark" />

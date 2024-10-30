@@ -41,15 +41,22 @@
 // export default Workout
 
 import { View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect, useFocusEffect, useCallback } from "react";
 import RNButton from "../../../components/RNButton";
 //import { Link,Redirect,router } from 'expo-router';
 import Preset from "./Preset";
 import Exercises from "./Exercises";
+import { getRoutine } from "../../../api/exerciseRoutines";
 //import { s, vs, ms } from 'react-native-size-matters';
+import useStore from "../../../store";
 
 const Workout = () => {
   const [activeComponent, setActiveComponent] = useState("Preset");
+  const saveRoutines = useStore((state) => state.saveRoutines);
+
+  useEffect(() => {
+    getRoutine();
+  }, []);
 
   return (
     <View className="bg-primary h-full">

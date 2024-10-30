@@ -39,6 +39,11 @@ const SignIn = () => {
       //   });
     }
     setLoading(false);
+    // const {
+    //   data: { user },
+    //   error: userError,
+    // } = await supabase.auth.getUser();
+    // console.log(user);
   }
 
   //  const [session, setSession] = useState(null)
