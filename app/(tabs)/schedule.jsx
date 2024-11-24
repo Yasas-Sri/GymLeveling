@@ -1,11 +1,16 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import { Calendar } from 'react-native-calendars';
 // import CalendarBook1 from '../../components/CalendarBook1';
 import CalendarPick from "../../components/CalendarPick";
+import { getSchedule } from "../../api/saveBooking";
 
 const Schedule = () => {
+  useEffect(() => {
+    getSchedule();
+  }, []);
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -14,8 +19,9 @@ const Schedule = () => {
             Workout Schedule
           </Text>
         </View>
-
-        <CalendarPick />
+        <View className="m-2">
+          <CalendarPick />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

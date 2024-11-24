@@ -16,21 +16,39 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import SelectPicker from "../../components/SelectPicker";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import useStore from "../../store";
+import { saveSignupdata } from "../../api/signupData";
 
 //  import { TextInput } from 'react-native-paper'
 
 const UserInfo = () => {
+  const { setUserInfo } = useStore();
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
-
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [experienceLevel, setExperienceLevel] = useState("");
 
   const toggleDatepicker = () => {
     setShowPicker(!showPicker);
   };
 
-  const handleClick = () => {
-    router.replace("/UserPhoto");
+  const handleSelect = (value) => {
+    setExperienceLevel(value);
+  };
+
+  const handleClick = async () => {
+    if (dateOfBirth && height && weight && experienceLevel) {
+      setUserInfo({
+        dateOfBirth,
+        height,
+        weight,
+        experienceLevel,
+      });
+      await saveSignupdata();
+      router.replace("/UserPhoto");
+    }
   };
 
   const onChange = ({ type }, selectedDate) => {
@@ -100,6 +118,24 @@ const UserInfo = () => {
               placeholderTextColor="#808080"
               keyboardType="numeric"
               inputMode="numeric"
+              value={height}
+              onChangeText={setHeight}
+            />
+          </View>
+        </View>
+
+        <View className="space-y-2 mt-7 w-full px-4 justify-center ">
+          <Text className="text-base text-gray-100 font-pmedium">Weight</Text>
+
+          <View className="border-2 border-blue-950 w-full h-16 px-4  rounded-2xl focus:border-orange-400 items-center flex-row">
+            <TextInput
+              className="flex-1 text-white text-base font-psemibold bg-primary"
+              placeholder="  weight"
+              placeholderTextColor="#808080"
+              keyboardType="numeric"
+              inputMode="numeric"
+              value={weight}
+              onChangeText={setWeight}
             />
           </View>
         </View>
@@ -119,7 +155,7 @@ const UserInfo = () => {
             keyboardType='numeric'
             inputMode='numeric'
                      /> */}
-            <SelectPicker />
+            <SelectPicker onSelect={handleSelect} />
           </View>
         </View>
 

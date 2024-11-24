@@ -5,28 +5,60 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Modal,
+  TouchableWithoutFeedback,
+  Button,
+  StyleSheet,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
 import useStore from "../../../store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import WeightLog from "../../../components/WeightLog";
-import { saveLoggedExercises } from "../../../api/exerciseRoutines";
+import {
+  saveLoggedExercises,
+  updateSavedRoutine,
+  getRoutine,
+} from "../../../api/exerciseRoutines";
+import { getloggedExercises } from "../../../api/exerciseRoutines";
 
 const StartRoutine = () => {
   const { routine_exercises, title, routineId } = useLocalSearchParams();
   const [newexercises, setNewexercises] = useState([]);
   const [finishEnabled, setFinishEnabled] = useState(false);
+  const [modalVisible, setModalVisible] = useState("false");
   const loggedExercises = useStore((state) => state.loggedExercises);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [haschecked, setHaschecked] = useState(false);
 
-  console.log(loggedExercises);
+  // console.log(loggedExercises);
+
+  // useEffect(() => {
+  //   setNewexercises((prevExercises) => [
+  //     ...prevExercises,
+  //     ...loggedExercises.filter(
+  //       (exercise) =>
+  //         !prevExercises.some(
+  //           (e) =>
+  //             e.exercise_id_fk === exercise.exercise_id_fk &&
+  //             e.sets === exercise.sets &&
+  //             e.reps === exercise.reps &&
+  //             e.weight === exercise.weight,
+  //         ),
+  //     ),
+  //   ]);
+  // }, [loggedExercises]);
 
   useEffect(() => {
-    setNewexercises(loggedExercises);
-    // console.log(loggedExercises);
-  }, [loggedExercises]);
+    if (haschecked) {
+      // console.log(newexercises);
+      setNewexercises(loggedExercises);
+    }
+    //console.log(loggedExercises);
+  }, [loggedExercises, haschecked]);
 
   const updateIsAnyChecked = (checkedStatus) => {
+    setHaschecked(true);
     setFinishEnabled(checkedStatus);
   };
 
@@ -34,12 +66,67 @@ const StartRoutine = () => {
 
   const finishRoutine = async () => {
     if (finishEnabled) {
-      saveLoggedExercises({ newexercises, routineId });
-    } // console.log(routineId);
-    // console.log(newexercises);
+      // console.log(newexercises);
+      await saveLoggedExercises({ newexercises, routineId });
+      handleExerciseChange(hasChanges);
+      // setModalVisible(true);
+      const exercise = null;
+      const currentDate = new Date();
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(currentDate.getDate() - 30);
+      const dateRange = {
+        start: thirtyDaysAgo.toISOString().split("T")[0],
+        to: currentDate.toISOString().split("T")[0],
+      };
+      getloggedExercises({ dateRange, exercise });
+    }
+  };
+
+  const handleExerciseChange = (changed) => {
+    // console.log("Exercise changed:", changed);
+    if (changed) {
+      setModalVisible(true);
+      //updateSavedRoutine({ newexercises, routineId });
+    }
+  };
+
+  const updateRoutine = async () => {
+    await updateSavedRoutine({ newexercises, routineId });
+    setModalVisible(false);
+    // getRoutine();
+  };
+
+  const keepRoutine = async () => {
+    //await updateSavedRoutine({ newexercises, routineId });
+    setModalVisible(false);
   };
 
   const exercises = JSON.parse(routine_exercises);
+  // console.log(exercises);
+
+  const groupedExercises = exercises.reduce((acc, exercise) => {
+    const existingExercise = acc.find(
+      (e) => e.exercise_id_fk === exercise.exercise_id_fk,
+    );
+
+    if (existingExercise) {
+      // Add the current set's reps, weight, and sets to the existing exercise arrays
+      existingExercise.sets.push(exercise.sets);
+      existingExercise.reps.push(exercise.reps);
+      existingExercise.weight.push(exercise.weight);
+    } else {
+      // Create a new entry for this exercise
+      acc.push({
+        exercise_id_fk: exercise.exercise_id_fk,
+        sets: [exercise.sets],
+        reps: [exercise.reps],
+        weight: [exercise.weight],
+      });
+    }
+    return acc;
+  }, []);
+
+  // console.log(groupedExercises);
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -83,17 +170,8 @@ const StartRoutine = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <View className=" mt-5  h-auto mx-2">
+        {/* <View className=" mt-5  h-auto mx-2">
           {exercises.map((exercise, index) => (
-            // <View key={index} className="flex-row justify-between mb-2">
-            //   {/* Assuming each exercise object has properties like 'name', 'reps', 'sets' */}
-            //   <Text className="text-white text-lg">
-            //     {exercisesdb[exercise.exercise_id_fk].name}
-            //   </Text>
-            //   <Text className="text-gray-400">
-            //     {exercise.reps} reps, {exercise.sets} sets
-            //   </Text>
-            // </View>
             <View
               key={index}
               className=" justify-between m-2 p-2  rounded-lg border-borderB border bg-cardB"
@@ -110,30 +188,107 @@ const StartRoutine = () => {
                 <Text className="text-white flex-1 space-y-2  px-4 m-2 font-pmedium">
                   {exercisesdb[exercise.exercise_id_fk].name}
                 </Text>
-                {/* <TouchableOpacity
-                    onPress={() => setModalVisible2(exercise.id)}
-                  >
-                    <MaterialCommunityIcons
-                      name="dots-vertical"
-                      size={30}
-                      color="white"
-                    />
-                  </TouchableOpacity> */}
               </View>
 
               <WeightLog
                 exerciseId={exercise.exercise_id_fk}
                 flag={true}
-                initialData={exercise}
+                initialData={exercises}
                 onCheckboxChange={updateIsAnyChecked}
+                onExerciseChange={finishRoutine}
+              />
+            </View>
+          ))}
+        </View> */}
+        <View className="mt-5 h-auto mx-2">
+          {groupedExercises.map((exercise, index) => (
+            <View
+              key={exercise.exercise_id_fk}
+              className="justify-between m-2 p-2 rounded-lg border border-borderB bg-cardB"
+            >
+              <View className="flex-row items-center">
+                <View className="h-14 bg-white rounded-full w-14 mb-5 overflow-hidden">
+                  <Image
+                    source={{
+                      uri: exercisesdb[exercise.exercise_id_fk].gifUrl,
+                    }}
+                    className="w-14 h-14"
+                  />
+                </View>
+                <Text className="text-white flex-1 space-y-2 px-4 m-2 font-pmedium">
+                  {exercisesdb[exercise.exercise_id_fk].name}
+                </Text>
+              </View>
+
+              <WeightLog
+                exerciseId={exercise.exercise_id_fk}
+                flag={true}
+                initialData={{
+                  reps: exercise.reps,
+                  weight: exercise.weight,
+                  sets: exercise.sets,
+                }}
+                onCheckboxChange={updateIsAnyChecked}
+                //onExerciseChange={finishRoutine}
+                setHasChanges={setHasChanges}
               />
             </View>
           ))}
         </View>
-        {/* </View> */}
+
+        <Modal visible={modalVisible} transparent={true} animationType="slide">
+          <TouchableWithoutFeedback onPress={() => setModalVisible("false")}>
+            <View style={styles.modalContainer2}>
+              <TouchableWithoutFeedback>
+                <View style={styles.modalContent2}>
+                  <View>
+                    <Text>Update {title}</Text>
+                    <Text>You have changed the routine</Text>
+                  </View>
+                  <View className="mb-2     w-full   ">
+                    <Button
+                      title="Update Routine"
+                      color="#0f0f36"
+                      onPress={updateRoutine}
+                    />
+                    <Button
+                      title="Keep Original Routine"
+                      color="#0f0f36"
+                      onPress={keepRoutine}
+                    />
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default StartRoutine;
+
+const styles = StyleSheet.create({
+  modalContainer2: {
+    flex: 1,
+    // justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+    width: "100%",
+  },
+  modalContent2: {
+    // width: 300,
+    width: "100%",
+    padding: 20,
+
+    backgroundColor: "white",
+    //borderRadius: 50,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: "15%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

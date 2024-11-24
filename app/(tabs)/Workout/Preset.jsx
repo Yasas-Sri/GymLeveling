@@ -29,20 +29,23 @@ const Preset = () => {
   const [modalVisible, setModalVisible] = useState("false"); // delete routines
   const [routineId, setroutineId] = useState();
   // const { addRoutine } = useStore.getState();
+  const [isLoading, setIsLoading] = useState(false);
   const addRoutine = useStore((state) => state.addRoutine);
 
   console.log(saveRoutines);
 
-  const routineStart = ({ item }) => {};
+  //const routineStart = ({ item }) => {};
 
   const deleteroutines = async ({ routineId }) => {
+    setIsLoading(true);
     await deleteRoutine({ routineId });
     // const callbacks = {
     //   onSuccess: getRoutine(addRoutine),
     // };
-    getRoutine();
+    await getRoutine();
     //addRoutine([]);
     setModalVisible(false);
+    setIsLoading(false);
   };
 
   const renderItem = ({ item }) => {
@@ -162,6 +165,8 @@ const Preset = () => {
                       title="Delete Routine"
                       color="#0f0f36"
                       onPress={() => deleteroutines({ routineId })}
+                      disabled={isLoading}
+                      //className={isLoading ? "opacity-50" : "#0f0f36"}
                     />
                   </View>
                 </View>

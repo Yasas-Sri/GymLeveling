@@ -6,8 +6,9 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
 
 import useStore from "../../../store";
@@ -15,9 +16,24 @@ import useStore from "../../../store";
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import CustomButton from "../../../components/CustomButton";
+import { getRoutine, saveRoutine } from "../../../api/exerciseRoutines";
 
 const WorkoutPlan = () => {
   const { routineId } = useLocalSearchParams();
+
+  const saveRoutines = useStore((state) => state.saveRoutines);
+
+  console.log(saveRoutines);
+  console.log(routineId);
+  useEffect(() => {
+    const routineExists = saveRoutines.some(
+      (routine) => routine.title === title,
+    );
+    console.log(routineExists);
+    if (routineExists) {
+      setBtnTitle("Saved");
+    }
+  }, [title, saveRoutines]);
 
   //console.log(routineId)
 
@@ -26,15 +42,29 @@ const WorkoutPlan = () => {
 
   const addRoutine = useStore((state) => state.addRoutine);
 
-  const [title, setTitle] = useState("Save Routine");
+  const [btntitle, setBtnTitle] = useState("Save Routine");
+  const [isLoading, setIsLoading] = useState(false);
 
   const workout = routines.find((routine) => routine.id === routineId);
 
-  const handleSave = () => {
-    //console.log(routineId)
-    addRoutine({ routineId });
+  const exercises = workout.exercises.map((id) => ({
+    id: id,
+    sets: ["1", "2", "3"],
+    reps: ["", "", ""],
+    weight: ["", "", ""],
+  }));
 
-    setTitle("Saved");
+  const title = workout.title;
+  console.log(exercises);
+  console.log(title);
+  const handleSave = async () => {
+    if (btntitle === "Save Routine") {
+      setIsLoading(true);
+      await saveRoutine({ title, exercises });
+      setBtnTitle("Saved");
+      getRoutine();
+      setIsLoading(false);
+    }
   };
 
   const renderExercise = ({ item }) => {
@@ -92,10 +122,10 @@ const WorkoutPlan = () => {
                 </Text>
               </View>
               <CustomButton
-                title={title}
+                title={btntitle}
                 handlePress={handleSave}
                 containerStyles="mt-7"
-                //isLoading={loading}
+                isLoading={isLoading}
               />
             </View>
 

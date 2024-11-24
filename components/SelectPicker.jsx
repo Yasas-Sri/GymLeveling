@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
-const SelectedTime = () => {
+const SelectedTime = ({ onSelect }) => {
   const [selectedTime, setSelectedTime] = useState("");
+
+  const handleValueChange = (value) => {
+    setSelectedTime(value);
+    onSelect(value); // Call the onSelect callback to update experience level in state
+  };
 
   return (
     <View style={styles.container}>
       <View className="border-blue-950 border-2 rounded-2xl font-pmedium">
         <RNPickerSelect
-          onValueChange={(value) => setSelectedTime(value)}
+          onValueChange={handleValueChange}
           items={[
             { label: "Select time", value: "" },
             { label: "Complete beginner", value: "beginner" },

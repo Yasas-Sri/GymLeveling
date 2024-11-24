@@ -70,10 +70,17 @@ const NewRoutine = () => {
     // const callbacks = {
     //   onSuccess: getRoutine(addRoutine),
     // };
+    console.log(exercises);
     await saveRoutine({ title, exercises });
     getRoutine();
     // console.log(exercises);
     // addRoutine(["dsdsdseeeeeee"]);
+  };
+
+  const discardRoutine = () => {
+    setExercises([]);
+    addExercises([]);
+    router.push("/Workout/workout");
   };
 
   return (
@@ -226,7 +233,7 @@ const NewRoutine = () => {
                     <Button
                       title="Discard Routine"
                       color="#FF7E06"
-                      onPress={() => router.push("/Workout/workout")}
+                      onPress={discardRoutine}
                     />
                   </View>
                   <View className="mb-2 ">

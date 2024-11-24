@@ -115,7 +115,7 @@ const SignIn = () => {
 
             {/* just for checking home , dummy link remove after auth */}
 
-            <Link href="/home" className="text-orange-400 text-lg">
+            <Link href="/gender" className="text-orange-400 text-lg">
               home
             </Link>
           </View>
