@@ -13,6 +13,12 @@ const Authlayout = () => {
           }}
         />
         <Stack.Screen
+          name="UserPhoto"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="sign-up"
           options={{
             headerShown: false,
@@ -27,13 +33,6 @@ const Authlayout = () => {
 
         <Stack.Screen
           name="userInfo"
-          options={{
-            headerShown: false,
-          }}
-        />
-
-        <Stack.Screen
-          name="UserPhoto"
           options={{
             headerShown: false,
           }}

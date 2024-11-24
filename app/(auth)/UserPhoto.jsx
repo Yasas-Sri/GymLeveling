@@ -1,53 +1,3 @@
-// import React, { useState,useEffect } from 'react';
-// import { View, Text, Button, Image, Alert } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-
-// const userPhoto = () => {
-
-//  const[GalleryPermission,setGalleryPermission] = useState(null);
-//  const [Photo,setPhoto] = useState(null);
-
-//  useEffect(()=>{
-
-//    (async ()=>{
-//       const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-//       setGalleryPermission(galleryStatus.status==='granted')
-//    })();
-//  },[]);
-
-//  const pickImage = async () =>{
-
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//        allowsEditing:true,
-//        aspect:[4,3],
-//        quality:1,
-//     })
-
-//     console.log(result)
-
-//     if(!result.canceled){
-//        setPhoto(result.url)
-//     }
-//  }
-
-//  if(GalleryPermission === false){
-
-//    return <Text>No access to internal Storage</Text>
-//  }
-
-//   return (
-//      <View>
-//          <Button title='Pick Image' onPress={()=>pickImage()}/>
-//          {image && <Image source={{uri:image}}/>}
-//      </View>
-//   );
-// };
-
-// export default userPhoto
-
-////////////////
-
 import React, { useState } from "react";
 import {
   View,
@@ -57,19 +7,63 @@ import {
   TouchableOpacity,
   Modal,
   StyleSheet,
+  TouchableWithoutFeedback,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+//import { uploadImageToServer } from "../../api/userImages";
+//import { FileObject } from "@supabase/storage-js";
+import { decode } from "base64-arraybuffer";
+import { supabase } from "../../lib/supabase";
+import * as FileSystem from "expo-file-system";
+
+const saveImage = async (assets) => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!(assets?.length > 0)) {
+    Alert.alert("No photo", "Add a Profile Photo", [
+      // {
+      //   text: "Cancel",
+      //   onPress: () => console.log(""),
+      //   style: "cancel",
+      // },
+      { text: "OK", onPress: () => console.log("") },
+    ]);
+    return;
+  }
+  if (user) {
+    const img = assets[0];
+    const base64 = await FileSystem.readAsStringAsync(img.uri, {
+      encoding: "base64",
+    });
+    // Check if user is not null
+    const filePath = `${user.id}/${new Date().getTime()}.${img.type === "image" ? "png" : "mp4"}`;
+    const contentType = img.type === "image" ? "image/png" : "video/mp4";
+    await supabase.storage
+      .from("images")
+      .upload(filePath, decode(base64), { contentType });
+  } else {
+    console.warn("User not authenticated.");
+  }
+};
 
 const UserPhoto = () => {
   const [imageUri, setImageUri] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [photo, setPhoto] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = () => {
-    router.replace("/home");
+  const handleClick = async () => {
+    if (photo?.length > 0) {
+      setIsLoading(true);
+      await saveImage(photo);
+      setIsLoading(false);
+      router.replace("/home");
+    }
   };
 
   const pickImageFromGallery = async () => {
@@ -83,14 +77,15 @@ const UserPhoto = () => {
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5,
     });
-
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
+      setModalVisible(false);
+      setPhoto(result?.assets || []);
     }
-
-    setModalVisible(false);
   };
 
   const takePhoto = async () => {
@@ -103,14 +98,16 @@ const UserPhoto = () => {
 
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5,
     });
 
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
+      setModalVisible(false);
+      setPhoto(result?.assets || []);
     }
-
-    setModalVisible(false);
   };
 
   return (
@@ -144,27 +141,23 @@ const UserPhoto = () => {
         </TouchableOpacity>
 
         <Modal visible={modalVisible} transparent={true} animationType="slide">
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <TouchableOpacity className="mt-5" onPress={takePhoto}>
-                <FontAwesome5 name="camera-retro" size={50} color="#0A0A2C" />
-              </TouchableOpacity>
+          <TouchableWithoutFeedback onPress={() => setModalVisible("false")}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity className="mt-5" onPress={takePhoto}>
+                  <FontAwesome5 name="camera-retro" size={50} color="#0A0A2C" />
+                </TouchableOpacity>
 
-              <TouchableOpacity className="mt-5" onPress={pickImageFromGallery}>
-                <FontAwesome5 name="image" size={50} color="#0A0A2C" />
-              </TouchableOpacity>
+                <TouchableOpacity
+                  className="mt-5"
+                  onPress={pickImageFromGallery}
+                >
+                  <FontAwesome5 name="image" size={50} color="#0A0A2C" />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
-
-        {/* <Button title="Pick Image from Gallery" onPress={pickImageFromGallery} color="#FF7E06" />
-      <Button title="Take a Photo" onPress={takePhoto}  /> */}
-        {/* {imageUri && (
-        <Image
-          source={{ uri: imageUri }}
-          style={{ width: 200, height: 200, borderRadius: 100, marginTop: 20 }}
-        />
-      )} */}
       </View>
 
       <View className=" px-4 my-20">
@@ -172,7 +165,7 @@ const UserPhoto = () => {
           title="Start your journey"
           handlePress={handleClick}
           containerStyles="mt-5"
-          // isLoading={isSubmitting}
+          isLoading={isLoading}
         />
       </View>
     </SafeAreaView>

@@ -40,7 +40,7 @@
 
 // export default Workout
 
-import { View } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import React, { useState, useEffect, useFocusEffect, useCallback } from "react";
 import RNButton from "../../../components/RNButton";
 //import { Link,Redirect,router } from 'expo-router';
@@ -52,7 +52,7 @@ import useStore from "../../../store";
 
 const Workout = () => {
   const [activeComponent, setActiveComponent] = useState("Preset");
-  const saveRoutines = useStore((state) => state.saveRoutines);
+  // const saveRoutines = useStore((state) => state.saveRoutines);
 
   useEffect(() => {
     getRoutine();
@@ -60,8 +60,8 @@ const Workout = () => {
 
   return (
     <View className="bg-primary h-full">
-      <View className="justify-around items-start flex-row mt-10">
-        <RNButton
+      <View className="justify-center flex-row mt-10">
+        {/* <RNButton
           mode="contained-tonal"
           title="Preset"
           textColor="white"
@@ -75,7 +75,35 @@ const Workout = () => {
           textColor="white"
           style={`rounded-l-lg ${activeComponent === "Exercises" ? "bg-secondary" : "bg-lightB"} gap-x-40`}
           handlePress={() => setActiveComponent("Exercises")}
-        />
+        /> */}
+        <TouchableOpacity
+          onPress={() => {
+            setActiveComponent("Preset");
+            //setroutineId(item.id);
+          }}
+        >
+          <View
+            className={`rounded-l-2xl    w-24 h-12 justify-center gap-x-1  ${activeComponent === "Preset" ? "bg-secondary" : "bg-lightB"} `}
+          >
+            <Text className=" justify-center self-center   text-white text-base font-serif m-2">
+              Preset
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setActiveComponent("Exercises");
+            //setroutineId(item.id);
+          }}
+        >
+          <View
+            className={`rounded-r-2xl w-24 h-12 justify-center  ${activeComponent === "Exercises" ? "bg-secondary" : "bg-lightB"} `}
+          >
+            <Text className="m-2  text-white text-base  justify-center self-center font-serif">
+              Exercises
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
 
       {activeComponent === "Preset" && (

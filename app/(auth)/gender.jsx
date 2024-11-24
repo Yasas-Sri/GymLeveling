@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import useStore from "../../store";
 
 const GenIcon = ({ icon, size, gender }) => {
   return (
@@ -15,8 +16,17 @@ const GenIcon = ({ icon, size, gender }) => {
 };
 
 const Gender = () => {
+  const [selectedGender, setSelectedGender] = useState(null);
+  const { setUserInfo } = useStore();
+  const handleGenderPress = (gender) => {
+    setSelectedGender(gender); // Update the selected gender state
+  };
+
   const handleClick = () => {
-    router.replace("/userInfo");
+    if (selectedGender) {
+      setUserInfo({ gender: selectedGender });
+      router.replace("/userInfo");
+    }
   };
 
   return (
@@ -37,14 +47,24 @@ const Gender = () => {
         <Text className="text-white text-2xl font-pmedium mt-10">Select</Text>
 
         <View className="mt-20 justify-between items-start flex-row gap-x-7  ">
-          <TouchableOpacity>
-            <View className=" border-white border-2 px-4 py-4">
+          <TouchableOpacity
+            onPress={() => handleGenderPress("Male")}
+            disabled={selectedGender === "Female"}
+          >
+            <View
+              className={`border-white border-2 px-4 py-4 ${selectedGender === "Male" ? "border-secondary" : ""}`}
+            >
               <GenIcon icon="face-man-shimmer" size={70} gender="Male" />
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
-            <View className=" border-white border-2 px-4 py-4">
+          <TouchableOpacity
+            onPress={() => handleGenderPress("Female")}
+            disabled={selectedGender === "Male"}
+          >
+            <View
+              className={`border-white border-2 px-4 py-4 ${selectedGender === "Female" ? "border-secondary" : ""}`}
+            >
               <GenIcon icon="face-woman-shimmer" size={70} gender="Female" />
             </View>
           </TouchableOpacity>

@@ -53,7 +53,12 @@ const WorkoutStack = () => {
             headerShown: false,
           }}
         />
-
+        <Stack.Screen
+          name="Summary"
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="AddExercises"
           options={{
@@ -63,6 +68,12 @@ const WorkoutStack = () => {
 
         <Stack.Screen
           name="StartRoutine"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ExerciseInfo"
           options={{
             headerShown: false,
           }}

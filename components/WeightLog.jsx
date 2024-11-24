@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "expo-checkbox";
 import {
   View,
@@ -13,43 +13,66 @@ import { FontAwesome } from "@expo/vector-icons";
 import useStore from "../store";
 //import CustomButton from './CustomButton'
 
-const WeightLog = ({ exerciseId, flag, initialData, onCheckboxChange }) => {
+const WeightLog = ({
+  exerciseId,
+  flag,
+  initialData,
+  onCheckboxChange,
+  setHasChanges,
+}) => {
   //console.log(initialData.reps);
   //console.log(initialData.weight);
-  const initialTableData = [
-    {
-      key: "1",
-      set: "1",
-      weight: initialData ? JSON.stringify(initialData.weight) : "",
-      rep: initialData ? JSON.stringify(initialData.reps) : "",
-      checked: false,
-    },
-  ];
+  let initialTableData = [];
 
+  if (flag) {
+    initialTableData = initialData.sets.map((set, index) => ({
+      key: (index + 1).toString(),
+      set: (index + 1).toString(),
+      weight: initialData.weight[index]
+        ? initialData.weight[index].toString()
+        : "",
+      rep: initialData.reps[index] ? initialData.reps[index].toString() : "",
+      checked: false,
+    }));
+  } else {
+    initialTableData = [
+      {
+        key: "1",
+        set: initialData ? JSON.stringify(initialData.weight) : "1",
+        weight: initialData ? JSON.stringify(initialData.weight) : "",
+        rep: initialData ? JSON.stringify(initialData.reps) : "",
+        checked: false,
+      },
+    ];
+  }
   const { addExerciseDetails, loggedExerciseDetails } = useStore();
   const [tableData, setTableData] = useState(initialTableData);
   const loggedExercises = useStore((state) => state.loggedExercises);
-  const [hasChanges, setHasChanges] = useState(false);
+  // const [hasChanges, setHasChanges] = useState(false);
+
+  const checkedRowsRef = useRef([]);
 
   useEffect(() => {
     // Automatically log initial data when component mounts if flag is true
     if (flag) {
-      //   const sets = tableData.map((row) => row.set);
-      //   const reps = tableData.map((row) => row.rep);
-      //   const weights = tableData.map((row) => row.weight);
       const checkedRows = tableData.filter((row) => row.checked);
+
       const sets = checkedRows.map((row) => row.set);
       const reps = checkedRows.map((row) => row.rep);
       const weights = checkedRows.map((row) => row.weight);
-      // const hasDataToLog =
-      //   reps.some((rep) => rep !== "") ||
-      //   weights.some((weight) => weight !== "");
-      // if (hasDataToLog) {
-      //   loggedExerciseDetails(exerciseId, { sets, reps, weights });
-      // }
+
+      console.log(checkedRows);
       loggedExerciseDetails(exerciseId, { sets, reps, weights });
+
+      //console.log(loggedExercises);
     }
   }, [exerciseId, flag, loggedExerciseDetails, tableData]);
+
+  // useEffect(() => {
+  //   if (hasChanges) {
+  //     onExerciseChange(true);
+  //   }
+  // }, [tableData, onExerciseChange, hasChanges]);
 
   //const addedExercises = useStore((state) => state.addedExercises);
 
@@ -64,7 +87,7 @@ const WeightLog = ({ exerciseId, flag, initialData, onCheckboxChange }) => {
     });
     setTableData(updatedTableData);
     const anyChecked = updatedTableData.some((row) => row.checked);
-    onCheckboxChange(anyChecked);
+    flag && onCheckboxChange(anyChecked);
   };
 
   const handleInputChange = (key, field, value) => {
@@ -84,6 +107,13 @@ const WeightLog = ({ exerciseId, flag, initialData, onCheckboxChange }) => {
       return row;
     });
     setTableData(updatedTableData);
+
+    if (
+      JSON.stringify(updatedTableData) !== JSON.stringify(initialTableData) &&
+      flag
+    ) {
+      setHasChanges(true); // Trigger the change
+    }
     // console.log(tableData);
     // addExerciseDetails(exerciseId, tableData);
     //  console.log(addedExercises);
@@ -106,7 +136,8 @@ const WeightLog = ({ exerciseId, flag, initialData, onCheckboxChange }) => {
       rep: "",
       checked: false,
     };
-    setTableData([...tableData, newRow]); // Add the new row
+    setTableData([...tableData, newRow]);
+    // flag && setHasChanges(true);
   };
 
   const deleteRow = (key) => {
@@ -118,6 +149,7 @@ const WeightLog = ({ exerciseId, flag, initialData, onCheckboxChange }) => {
     }));
 
     setTableData(updatedDataWithNewKeys);
+    // flag && setHasChanges(true);
   };
 
   // Render each row of the table
