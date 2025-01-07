@@ -11,7 +11,6 @@ import {
   TouchableWithoutFeedback,
   Image,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 //import RNButton from '../../../components/RNButton'
@@ -21,47 +20,46 @@ import WeightLog from "../../../components/WeightLog";
 import { router } from "expo-router";
 import { getRoutine, saveRoutine } from "../../../api/exerciseRoutines";
 import useStore from "../../../store";
+import { useLocalSearchParams } from "expo-router";
+import { saveWorkoutPlan } from "../../../api/trainer";
 
 const NewRoutine = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(-1);
-  const [modalVisible3, setModalVisible3] = useState(false); // modal for not pressing save without saving any exercises
+  const [modalVisible3, setModalVisible3] = useState(false); // modal for message after succesfully adding new routine
+  const [modalVisible4, setModalVisible4] = useState(false);
   const [exercises, setExercises] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [title, setTitle] = useState("Untitled");
-  const { clearAllExercises } = useStore();
+  const [title, setTitle] = useState("Untitled trainer");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { userId } = useLocalSearchParams();
+
   const { addExerciseDetails, removeExercise } = useStore();
   const exercisesdb = useStore((state) => state.exerciseMap);
   const addedExercises = useStore((state) => state.addedExercises);
-  //const deleteExerciseFromStore = useStore((state) => state.deleteExercise);
-  //const { addRoutine } = useStore.getState();
-  const addRoutine = useStore((state) => state.addRoutine);
+  const { clearAllExercises } = useStore();
+
+  console.log("memberID", userId);
 
   useEffect(() => {
     setExercises(addedExercises);
   }, [addedExercises]);
 
   const addExercises = () => {
-    //setModalVisible(true);
-    router.push("/Workout/AddExercises");
+    //setModalVisible(true);S
+    //router.push("/users/addExercises");
+    router.push({
+      pathname: "/users/addExercises",
+      params: { userId: `${userId}` },
+    });
   };
-
-  // const saveExercise = () => {
-  //   if (inputText.trim()) {
-  //     // Only add if there's text in the input
-  //     setExercises((prevExercises) => [...prevExercises, inputText]);
-  //   }
-  //   setModalVisible(false);
-  //   setInputText("");
-  // };
 
   const deleteExercise = (index) => {
     setExercises((prevExercises) =>
       prevExercises.filter((_, i) => i !== index),
     );
-    //deleteExerciseFromStore(index);
     removeExercise(index);
     setModalVisible2(-1);
   };
@@ -71,46 +69,38 @@ const NewRoutine = () => {
   };
 
   const saveRoutines = async () => {
-    // const callbacks = {
-    //   onSuccess: getRoutine(addRoutine),
-    // }
     if (
       !exercises ||
       exercises.length === 0 ||
       !exercises.some((exercise) => exercise.id)
     ) {
-      setModalVisible3(true);
+      setModalVisible4(true);
     } else {
       setIsLoading(true);
-      console.log(exercises);
-      await saveRoutine({ title, exercises });
-      getRoutine();
+      await saveWorkoutPlan({ title, exercises, userId });
       setIsLoading(false);
-      router.replace("/Workout/");
       clearAllExercises();
+      setModalVisible3(true);
+      console.log("member id in saveroutines in workoutplan", userId);
+      console.log("exercises in func", exercises);
     }
-
-    console.log("exercises", exercises);
-    // addRoutine(["dsdsdseeeeeee"]);
   };
 
   const discardRoutine = () => {
-    // setExercises([]);
-    // addExercises([]);
     clearAllExercises();
-    router.push("/Workout/");
+    router.push("/users/");
   };
-
+  //console.log(exercises);
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="justify-between flex-row mt-10">
           {/* <RNButton
-          mode="contained-tonal"
-          title="Cancel"
-          style="rounded  bg-cardB ml-2 min-w-24 border-borderB border-2" 
-        //   handlePress={() => setActiveComponent('Preset')}
-        /> */}
+            mode="contained-tonal"
+            title="Cancel"
+            style="rounded  bg-cardB ml-2 min-w-24 border-borderB border-2" 
+          //   handlePress={() => setActiveComponent('Preset')}
+          /> */}
 
           <TouchableOpacity onPress={cancelRoutine}>
             <View className=" bg-cardB border-borderB border p-4 rounded-xl ml-2 w-24 ">
@@ -125,18 +115,14 @@ const NewRoutine = () => {
           </Text>
 
           {/* <RNButton
-          mode="contained-tonal"
-          title="Save"
-          style="rounded  bg-secondary mr-2 min-w-24" 
-         //S handlePress={() => setActiveComponent('Exercises')}
-        /> */}
+            mode="contained-tonal"
+            title="Save"
+            style="rounded  bg-secondary mr-2 min-w-24" 
+           //S handlePress={() => setActiveComponent('Exercises')}
+          /> */}
 
           <TouchableOpacity onPress={saveRoutines}>
             <View className=" bg-secondary border-borderB border p-4  rounded-xl mr-2 w-24">
-              {/* <Text className=" justify-center self-center text-white">
-                Save
-              </Text> */}
-
               {isLoading ? (
                 <ActivityIndicator size="small" color="#ffffff" />
               ) : (
@@ -216,34 +202,34 @@ const NewRoutine = () => {
 
         {/* Modal adding exercises */}
         {/* <Modal visible={modalVisible} transparent={true} animationType="slide">
-          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={styles.modalContainer}>
-              <TouchableWithoutFeedback>
-                <View style={styles.modalContent}>
-                  <TextInput
-                    //className="flex-1 text-primary text-base font-psemibold  focus:border-orange-400  h-40 p-10,"
-                    value={inputText}
-                    placeholder="Exercise"
-                    placeholderTextColor="#808080"
-                    onChangeText={setInputText}
-                    style={styles.input}
-                  />
-
-                  <View className="mb-2 ">
-                    <Button title="+" color="#0f0f36" onPress={saveExercise} />
-                  </View>
-                  <View className="mb-2 ">
-                    <Button
-                      title="-"
-                      color="#FF7E06"
-                      onPress={() => setModalVisible(false)}
+            <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+              <View style={styles.modalContainer}>
+                <TouchableWithoutFeedback>
+                  <View style={styles.modalContent}>
+                    <TextInput
+                      //className="flex-1 text-primary text-base font-psemibold  focus:border-orange-400  h-40 p-10,"
+                      value={inputText}
+                      placeholder="Exercise"
+                      placeholderTextColor="#808080"
+                      onChangeText={setInputText}
+                      style={styles.input}
                     />
+  
+                    <View className="mb-2 ">
+                      <Button title="+" color="#0f0f36" onPress={saveExercise} />
+                    </View>
+                    <View className="mb-2 ">
+                      <Button
+                        title="-"
+                        color="#FF7E06"
+                        onPress={() => setModalVisible(false)}
+                      />
+                    </View>
                   </View>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal> */}
+                </TouchableWithoutFeedback>
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal> */}
 
         {/* modal for discard the routine           */}
         <Modal visible={modalVisible1} transparent={true} animationType="slide">
@@ -251,42 +237,24 @@ const NewRoutine = () => {
             <View style={styles.modalContainer}>
               <TouchableWithoutFeedback>
                 <View style={styles.modalContent}>
-                  <Text className="font-pregular text-white mb-1">
+                  <Text className="font-pregular">
                     Are you sure you want to discard the routine
                   </Text>
 
-                  {/* <View className="mb-2 ">
+                  <View className="mb-2 ">
                     <Button
                       title="Discard Routine"
-                      color="rgba(255, 126, 6,0.7)"
+                      color="#FF7E06"
                       onPress={discardRoutine}
                     />
-                  </View> */}
-
-                  <TouchableOpacity onPress={discardRoutine}>
-                    <View className=" bg-secondaryLight border-secondaryLight border mb-2  w-fit p-2 rounded-xl min-h-[50px]  justify-center items-center">
-                      <Text className="  text-white  font-psemibold text-base">
-                        Discard Routine
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-
-                  {/* <View className="mb-2 rounded-lg ">
+                  </View>
+                  <View className="mb-2 ">
                     <Button
                       title="Cancel"
-                      color="black"
+                      color="#0f0f36"
                       onPress={() => setModalVisible1(false)}
                     />
-                  </View> */}
-
-                  <TouchableOpacity onPress={() => setModalVisible1(false)}>
-                    <View className=" bg-black border-borderB border mb-2  w-fit p-2 rounded-xl min-h-[50px]  justify-center items-center">
-                      <Text className="  text-white  font-psemibold text-base">
-                        Cancel
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-
+                  </View>
                 </View>
               </TouchableWithoutFeedback>
             </View>
@@ -303,25 +271,42 @@ const NewRoutine = () => {
             <View style={styles.modalContainer2}>
               <TouchableWithoutFeedback>
                 <View style={styles.modalContent2}>
-                  {/* <View className="mb-2     w-full   ">
+                  <View className="mb-2  w-full   ">
                     <Button
                       title="Delete Exercise"
                       color="#0f0f36"
                       onPress={() => deleteExercise(modalVisible2)}
                     />
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+
+        {/* modal for after adding a new routine success message */}
+        <Modal visible={modalVisible3} transparent={true} animationType="slide">
+          <TouchableWithoutFeedback onPress={() => setModalVisible3(false)}>
+            <View style={styles.modalContainer}>
+              <TouchableWithoutFeedback>
+                <View style={styles.modalContent}>
+                  <Text className="font-pregular text-white mb-5">
+                    Successfully added the routine
+                  </Text>
+
+                  {/* <View className="mb-2 ">
+                    <Button
+                      title="Ok"
+                      color="#FF7E06"
+                      onPress={() => router.replace("/users/")}
+                    />
                   </View> */}
 
-                  <TouchableOpacity
-                    onPress={() => deleteExercise(modalVisible2)}
-                  >
-                    <View className=" bg-black border-borderB border mb-2  min-w-full p-2 rounded-xl min-h-[50px]  justify-center items-center">
-                      {isLoading ? (
-                        <ActivityIndicator size="small" color="#FF7E06" />
-                      ) : (
-                        <Text className="  text-white  font-psemibold text-base">
-                          Delete Exercise
-                        </Text>
-                      )}
+                  <TouchableOpacity onPress={() => router.replace("/users/")}>
+                    <View className=" bg-secondaryLight border-secondaryLight border mb-2  w-fit p-2 rounded-xl min-h-[20px]  justify-center items-center">
+                      <Text className="  text-white  font-psemibold text-base">
+                        Ok
+                      </Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -331,24 +316,24 @@ const NewRoutine = () => {
         </Modal>
 
         {/* modal for not pressing save without saving any exercises*/}
-        <Modal visible={modalVisible3} transparent={true} animationType="slide">
-          <TouchableWithoutFeedback onPress={() => setModalVisible3(false)}>
+        <Modal visible={modalVisible4} transparent={true} animationType="slide">
+          <TouchableWithoutFeedback onPress={() => setModalVisible4(false)}>
             <View style={styles.modalContainer}>
               <TouchableWithoutFeedback>
                 <View style={styles.modalContent}>
-                  <Text className="font-pregular text-white mb-2 text-center">
+                  <Text className="font-pregular text-white mb-5 text-center">
                     Add at least one exercise
                   </Text>
 
                   {/* <View className="mb-2  ">
-                    <Button
-                      title="Ok"
-                      color="#FF7E06"
-                      onPress={() => setModalVisible3(false)}
-                    />
-                  </View> */}
+                            <Button
+                              title="Ok"
+                              color="#FF7E06"
+                              onPress={() => setModalVisible3(false)}
+                            />
+                          </View> */}
 
-                  <TouchableOpacity onPress={() => setModalVisible3(false)}>
+                  <TouchableOpacity onPress={() => setModalVisible4(false)}>
                     <View className=" bg-secondaryLight border-secondaryLight border mb-2  w-fit p-2 rounded-xl min-h-[50px]  justify-center items-center">
                       <Text className="  text-white  font-psemibold text-base">
                         Ok
@@ -397,7 +382,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "flex-end",
     width: "100%",
   },
@@ -406,14 +391,12 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
 
-    backgroundColor: "rgba(15, 15, 54,0.8)",
+    backgroundColor: "white",
     //borderRadius: 50,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     height: "15%",
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "#363670",
-    borderWidth: 1,
   },
 });

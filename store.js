@@ -21,6 +21,7 @@ const useStore = create((set) => ({
   loggedExercises: [], // exercises user logged in the finish routine
   saveBookings: [],
   fetchloggedExercises: [], // fetching logged exercises from database
+  usersfetchloggedexercise: [], // trainer fetch users logged data
   fetchloggedEachExercise: [], // fetch each logged exercise
   userInfo: {
     gender: null,
@@ -29,6 +30,37 @@ const useStore = create((set) => ({
     weight: null,
     experienceLevel: null,
   },
+  imageFiles: [],
+  progressimageFiles: [],
+  authData: {
+    userId: null,
+    userName: null,
+    role: null,
+  },
+
+  users: [],
+  progress: [],
+
+  userRole: "",
+  userSession: {}, // add the user aken from supabse contains user id and other data of user
+
+  addProgress: (newProgress) => set((state) => ({ progress: newProgress })),
+
+  addUserSession: (newSession) => set((state) => ({ userSession: newSession })),
+
+  addUsers: (newUsers) => set((state) => ({ users: newUsers })),
+
+  addUserRole: (role) => set((state) => ({ userRole: role })),
+
+  setAuthData: (newAuthData) =>
+    set((state) => ({
+      authData: { ...state.authData, ...newAuthData },
+    })),
+
+  addImage: (newImage) => set((state) => ({ imageFiles: newImage })),
+
+  addprogressImage: (newImage) =>
+    set((state) => ({ progressimageFiles: newImage })),
 
   setUserInfo: (newUserInfo) =>
     set((state) => ({
@@ -103,6 +135,12 @@ const useStore = create((set) => ({
       addedExercises: state.addedExercises.filter(
         (exercise) => exercise.id !== exerciseId,
       ),
+    })),
+
+  //remove all the exercises chosed when cancel button is pressed
+  clearAllExercises: () =>
+    set(() => ({
+      addedExercises: [],
     })),
 
   //   loggedExerciseDetails: (exerciseId, { sets, reps, weights }) =>
@@ -180,6 +218,11 @@ const useStore = create((set) => ({
   addFetchLoggedEachExercise: (exercises) =>
     set((state) => ({
       fetchloggedEachExercise: exercises,
+    })),
+
+  addUserFetchLoggedExercises: (exercises) =>
+    set((state) => ({
+      usersfetchloggedexercise: exercises,
     })),
 }));
 

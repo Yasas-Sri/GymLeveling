@@ -2,19 +2,15 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import SelectExerciseSearch from "../../../components/SelectExerciseSearch";
 import useStore from "../../../store";
+import { useLocalSearchParams } from "expo-router";
 import { router } from "expo-router";
 
 const AddExercises = () => {
+  //  console.log("in addExercises");
   const { clearAllExercises } = useStore();
   const { addExerciseDetails } = useStore();
   const [selectedExercises, setSelectedExercises] = useState([]);
-
-  // const handleSave = () => {
-  //   selectedExercises.forEach((exerciseID) => {
-  //     addExerciseDetails(exerciseID, { sets: 0, reps: 0, weight: 0 });
-  //   });
-  //   router.push("/Workout/NewRoutine");
-  // };
+  const { userId } = useLocalSearchParams();
   const handleSave = () => {
     selectedExercises.forEach((exerciseID) => {
       addExerciseDetails(exerciseID, {
@@ -25,16 +21,19 @@ const AddExercises = () => {
     });
     //router.push("/users/workoutPlan");
     router.push({
-      pathname: "/Workout/NewRoutine",
+      pathname: "/users/workoutPlan",
+      params: { userId: `${userId}` },
     });
   };
+  console.log("set exercises", selectedExercises);
+
   return (
     <View className="bg-primary h-full">
       <View className="justify-between flex-row mt-10">
         <TouchableOpacity
           onPress={() => {
             clearAllExercises();
-            router.push("/Workout/NewRoutine");
+            router.push("/users/workoutPlan");
           }}
         >
           <View className=" bg-cardB border-borderB border p-4 rounded-xl ml-2 w-24 ">
@@ -47,13 +46,6 @@ const AddExercises = () => {
         <Text className="text-white justify-items-center self-center text-sm font-psemibold">
           Add Exercise
         </Text>
-
-        {/* <RNButton
-          mode="contained-tonal"
-          title="Save"
-          style="rounded  bg-secondary mr-2 min-w-24" 
-         //S handlePress={() => setActiveComponent('Exercises')}
-        /> */}
 
         <TouchableOpacity onPress={handleSave}>
           <View className=" bg-secondary border-borderB border p-4  rounded-xl mr-2 w-24">

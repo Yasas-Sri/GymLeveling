@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import useStore from "../store";
+import FastImage from "react-native-fast-image";
 
 // const addExercise = () => {
 //   setExercises((prevExercises) => [...prevExercises, inputText]);
@@ -13,7 +14,12 @@ const SelectItemList = React.memo(
 
     // const addExercise = useStore((state) => state.addExercise);
     const { addExerciseDetails } = useStore();
+    const [isSelected, setIsSelected] = useState(false);
 
+    const handlePress = () => {
+      setIsSelected(!isSelected); // Toggle selected state
+      onSave(); // Call the parent onSave function
+    };
     // const saveExercise = () => {
     //   setExercises((prevExercises) => {
     //     // Check if the exerciseID is already in the exercises array
@@ -38,16 +44,26 @@ const SelectItemList = React.memo(
     // }, [exercises]);
 
     return (
-      <TouchableOpacity onPress={onSave}>
-        <View className="justify-start flex-row ml-2">
-          <View className="h-14 bg-white rounded-full w-14 mb-5 overflow-hidden">
-            <Image source={{ uri: gifPhoto }} className="w-14 h-14" />
-          </View>
+      <TouchableOpacity onPress={handlePress}>
+        <View className="p-1">
+          <View
+            className={`justify-start flex-row    ${
+              isSelected ? "bg-lightB rounded-2xl" : "bg-primary"
+            }`}
+          >
+            <View className="h-14 bg-white rounded-full w-14 m-1 overflow-hidden  ">
+              <Image source={{ uri: gifPhoto }} className="w-14 h-14 " />
+            </View>
 
-          <Text className="my-0.5 rounded border-slate-600 border-solid text-white py-2 px-4 font-pregular text-base capitalize ">
-            {name}
-          </Text>
-          {/* <Text>{target}</Text> */}
+            <Text
+              className={`my-0.5 rounded border-slate-600 border-solid text-white py-2 px-4 font-pregular text-base capitalize self-center  ${
+                isSelected ? "text-secondary" : "text-white"
+              }`}
+            >
+              {name}
+            </Text>
+            {/* <Text>{target}</Text> */}
+          </View>
         </View>
       </TouchableOpacity>
     );

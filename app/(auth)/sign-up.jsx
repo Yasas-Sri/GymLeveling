@@ -5,6 +5,10 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { supabase } from "../../lib/supabase";
+import useStore from "../../store";
+//import { saveAuthdata } from "../../api/signupData";
+import SelectRole from "../../components/SelectRole";
+import { useAuth } from "../../context/AuthContext";
 // import { makeRedirectUri } from 'expo-auth-session'
 // import * as QueryParams from 'expo-auth-session/build/QueryParams'
 // import * as WebBrowser from 'expo-web-browser'
@@ -12,76 +16,71 @@ import { supabase } from "../../lib/supabase";
 // import { CommonActions } from '@react-navigation/native';
 
 const SignUp = () => {
-  //  const [form,setForm] = useState({
-  //      username:'',
-  //      email:'',
-  //      password:''
-  //  })
-
-  //  const [isSubmitting,setIsSubmitting] = useState(false)
-
-  //  const submit = () =>{
-
-  //  }
-
-  //  const routeChange= () =>{
-
-  //          router.push('/gender')
-  //  }
-
-  //  const handleClick = ()=>{
-  //           submit();
-  //           routeChange();
-  //  };
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState("");
+  const { setAuthData } = useStore();
+  const { onSignup } = useAuth();
 
   //const navigation = useNavigation();
 
-  async function signUpWithEmail() {
-    setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      userName: userName,
-    });
+  // async function signUpWithEmail() {
+  //   setLoading(true);
+  //   const {
+  //     data: { session },
+  //     error,
+  //   } = await supabase.auth.signUp({
+  //     email: email,
+  //     password: password,
+  //   });
 
-    if (error) Alert.alert(error.message);
-    else {
-      // router.dismissAll();
-      router.replace("/gender");
-      //   navigation.reset({
-      //     index: 0,
-      //     routes: [{ name: 'home' }], // your stack screen name
-      // });
-    }
-    if (!session)
-      Alert.alert("Please check your inbox for email verification!");
+  //   const userId = session.user?.id;
+  //   setAuthData({
+  //     userId: userId,
+  //     userName: userName,
+  //     role: role,
+  //   });
+  //   if (error) Alert.alert(error.message);
+  //   else {
+  //     await saveAuthdata();
+  //     // if (role === "Trainer") {
+  //     //   router.replace("/UserPhoto");
+  //     // }
+  //     router.replace("/gender");
+  //   }
+  //   if (!session)
+  //     Alert.alert("Please check your inbox for email verification!");
+  //   setLoading(false);
+  // }
+  const signUpWithEmail = async () => {
+    setLoading(true);
+    await onSignup(email, password, userName, role);
     setLoading(false);
-  }
+    router.replace("/gender");
+  };
 
   const [session, setSession] = useState(null);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+  // }, []);
+
+  const handleSelect = (value) => {
+    setRole(value);
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className="w-full justify-center min-h-[85vh] px-4 my-6">
+        <View className="w-full justify-center min-h-[85vh] px-4 my-1">
           <Image
             source={require("../../assets/l3.png")}
             className="w-[115px] h-[120px] "
@@ -94,28 +93,47 @@ const SignUp = () => {
             title="Username"
             value={userName}
             handleChangeText={(text) => setUserName(text)}
-            otherStyles="mt-7"
+            otherStyles="mt-5"
+            placeholder="Name"
           />
 
           <FormField
             title="Email"
             value={email}
             handleChangeText={(text) => setEmail(text)}
-            otherStyles="mt-7"
+            otherStyles="mt-5"
             keyboardType="email-address"
+            placeholder="123@gmail.com"
           />
 
           <FormField
             title="Password"
             value={password}
             handleChangeText={(text) => setPassword(text)}
-            otherStyles="mt-7"
+            otherStyles="mt-5"
+            placeholder="asdfg"
           />
+
+          {/* <View className="space-y-2 mt-7  px-4 justify-center ">
+            <Text className="text-base text-gray-100 font-pmedium">
+              Experience level
+            </Text>
+
+            <View className="  focus:border-orange-400 ">
+              <SelectRole onSelect={handleSelect} />
+            </View>
+          </View> */}
+
+          <View className="space-y-2 mt-5">
+            <Text className="text-base text-gray-100 font-pmedium">Role</Text>
+
+            <SelectRole onSelect={handleSelect} />
+          </View>
 
           <CustomButton
             title="Sign Up"
             handlePress={signUpWithEmail}
-            containerStyles="mt-7"
+            containerStyles="mt-5"
             isLoading={loading}
           />
 

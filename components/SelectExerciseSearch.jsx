@@ -7,45 +7,34 @@ import useStore from "../store";
 
 const data = require("../db.json");
 
-const SelectExerciseSearch = () => {
+const SelectExerciseSearch = ({ onSaveExercises }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(data);
-
+  const [selectedExercises, setSelectedExercises] = useState([]);
   const addedExercises = useStore((state) => state.addedExercises);
   const [exercises, setExercises] = useState(addedExercises);
   const { addExerciseDetails } = useStore();
 
-  // const saveExercise = (exerciseID) => {
-  //   setExercises((prevExercises) => {
-  //     // Check if the exerciseID is already in the exercises array
-  //     if (!prevExercises.includes(exerciseID)) {
-  //       // If not, add it to the state
-  //       const updatedExercises = [...prevExercises, exerciseID];
-  //       // Add the new exercise to the global store
+  const toggleExerciseSelection = (exerciseID) => {
+    setSelectedExercises((prev) =>
+      prev.includes(exerciseID)
+        ? prev.filter((id) => id !== exerciseID)
+        : [...prev, exerciseID],
+    );
+  };
+
+  // const saveExercise = useCallback(
+  //   (exerciseID) => {
+  //     if (!addedExercises.includes(exerciseID)) {
   //       addExerciseDetails(exerciseID, {
   //         sets: 0,
   //         reps: 0,
   //         weight: 0,
   //       });
-  //       return updatedExercises;
   //     }
-  //     // If the exerciseID is already in the state, return the current state
-  //     return prevExercises;
-  //   });
-  // };
-
-  const saveExercise = useCallback(
-    (exerciseID) => {
-      if (!addedExercises.includes(exerciseID)) {
-        addExerciseDetails(exerciseID, {
-          sets: 0,
-          reps: 0,
-          weight: 0,
-        });
-      }
-    },
-    [addedExercises, addExerciseDetails],
-  );
+  //   },
+  //   [addedExercises, addExerciseDetails],
+  // );
 
   const debouncedSearch = useCallback(
     debounce((query) => {
@@ -73,14 +62,19 @@ const SelectExerciseSearch = () => {
           name={item.name}
           exerciseID={item.id}
           gifPhoto={item.gifUrl}
-          onSave={() => saveExercise(item.id)}
+          onSave={() => toggleExerciseSelection(item.id)}
+          //  saveExercise(item.id)
         />
       </View>
     ),
-    [saveExercise],
+    [],
   );
 
   const keyExtractor = useCallback((item) => item.id.toString(), []);
+
+  React.useEffect(() => {
+    onSaveExercises(selectedExercises);
+  }, [selectedExercises, onSaveExercises]);
 
   return (
     <>
@@ -98,10 +92,6 @@ const SelectExerciseSearch = () => {
         initialNumToRender={10} // How many items to render initially
         maxToRenderPerBatch={10} // Render this many items per scroll batch
         windowSize={5}
-
-        // getItemLayout={(data, index) => (
-        //   { length: 14, offset: 14 * index, index }
-        // )}
       />
     </>
   );

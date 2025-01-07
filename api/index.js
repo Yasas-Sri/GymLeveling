@@ -1,6 +1,6 @@
 import { supabase } from "../lib/supabase";
 
-const getAuthHeaders = async () => {
+export const getAuthHeaders = async () => {
   const {
     data: {
       session: { access_token },

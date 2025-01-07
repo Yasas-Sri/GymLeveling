@@ -1,10 +1,11 @@
 import { View, Text, ScrollView, Image, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../context/AuthContext";
 //import { CommonActions } from '@react-navigation/native';
 // import GoogleSignin from '../../components/GoogleSignin'
 
@@ -19,49 +20,33 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { onLogin, authState } = useAuth();
 
+  useEffect(() => {
+    console.log("Auth state changed:", authState);
+  }, [authState]);
   //const navigation = useNavigation();
 
-  async function signInWithEmail() {
+  // async function signInWithEmail() {
+  //   setLoading(true);
+  //   const { error } = await supabase.auth.signInWithPassword({
+  //     email: email,
+  //     password: password,
+  //   });
+
+  //   if (error) Alert.alert(error.message);
+  //   else {
+  //     router.replace("/home");
+  //   }
+  //   setLoading(false);
+  // }
+
+  const signInWithEmail = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    else {
-      //  router.dismissAll();
-      router.replace("/home");
-      //     navigation.reset({
-      //       index: 0,
-      //       routes: [{ name: 'home' }], // your stack screen name
-      //   });
-    }
+    await onLogin(email, password);
     setLoading(false);
-    // const {
-    //   data: { user },
-    //   error: userError,
-    // } = await supabase.auth.getUser();
-    // console.log(user);
-  }
-
-  //  const [session, setSession] = useState(null)
-
-  //   useEffect(() => {
-  //     supabase.auth.getSession().then(({ data: { session } }) => {
-  //       setSession(session)
-  //     })
-
-  //     supabase.auth.onAuthStateChange((_event, session) => {
-  //       setSession(session)
-  //     })
-  //   }, [])
-
-  //  const submit = () =>{
-
-  //    router.push('/home')
-  //  }
+    router.replace("/(tabs)/");
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">

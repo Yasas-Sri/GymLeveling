@@ -1,6 +1,9 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { router } from "expo-router";
+import FastImage from "react-native-fast-image";
+import { WebView } from "react-native-webview";
+import { Image } from "expo-image";
 
 const ItemList = React.memo(
   ({ name, gifPhoto, exerciseID }) => {

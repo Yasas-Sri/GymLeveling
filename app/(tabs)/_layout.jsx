@@ -3,8 +3,12 @@ import { Tabs } from "expo-router";
 // import {icons} from '../../constants'
 // import CustomIconButton from '../../components/CustomIconButton'
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useAuth } from "../../context/AuthContext";
+
+//console.log(Role);
 
 const TabIcon = ({ icon, color, size }) => {
+  // console.log(Role);
   return (
     <View className="items-center justify-center gap-2">
       {/* <Image
@@ -21,6 +25,7 @@ const TabIcon = ({ icon, color, size }) => {
 };
 
 const TabsLayout = () => {
+  const { authState, Role } = useAuth();
   return (
     <>
       <Tabs
@@ -34,9 +39,9 @@ const TabsLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="home"
+          name="index"
           options={{
-            title: "Home",
+            title: "home",
             headerShown: false,
 
             tabBarIcon: ({ icon, color, size }) => (
@@ -48,14 +53,25 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="schedule"
           options={{
-            title: "Schedule",
+            title: "schedule",
             headerShown: false,
             tabBarIcon: ({ icon, color, size }) => (
               <TabIcon icon="calendar-alt" color={color} size={20} />
             ),
           }}
+          redirect={authState?.role !== "Member"}
         />
-
+        <Tabs.Screen
+          name="users"
+          options={{
+            title: "users",
+            headerShown: false,
+            tabBarIcon: ({ icon, color, size }) => (
+              <TabIcon icon="users" color={color} size={20} />
+            ),
+          }}
+          redirect={authState?.role !== "Trainer"}
+        />
         <Tabs.Screen
           name="Workout"
           options={{
@@ -65,6 +81,7 @@ const TabsLayout = () => {
               <TabIcon icon="dumbbell" color={color} size={20} />
             ),
           }}
+          redirect={authState?.role !== "Member"}
         />
 
         <Tabs.Screen
@@ -76,17 +93,19 @@ const TabsLayout = () => {
               <TabIcon icon="user" color={color} size={20} />
             ),
           }}
+          // redirect={authState?.authenticated === null}
         />
 
         <Tabs.Screen
           name="notifications"
           options={{
-            title: "Notifications",
+            title: "notifications",
             headerShown: false,
             tabBarIcon: ({ icon, color, size }) => (
               <TabIcon icon="bell" color={color} size={20} />
             ),
           }}
+          redirect={authState?.role !== "Member"}
         />
       </Tabs>
     </>

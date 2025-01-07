@@ -9,6 +9,7 @@ module.exports = {
         lightB: "rgba(17,17,79,0.5)",
         borderB: "#363670",
         cardB: "#0f0f36",
+        secondaryLight: "rgba(255, 126, 6,0.7)",
       },
 
       fontFamily: {

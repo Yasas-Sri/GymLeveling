@@ -11,7 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import useStore from "../../../store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import WeightLog from "../../../components/WeightLog";
@@ -78,7 +78,10 @@ const StartRoutine = () => {
         start: thirtyDaysAgo.toISOString().split("T")[0],
         to: currentDate.toISOString().split("T")[0],
       };
-      getloggedExercises({ dateRange, exercise });
+      await getloggedExercises({ dateRange, exercise });
+      if (!hasChanges) {
+        router.replace("/Workout/");
+      }
     }
   };
 
@@ -93,12 +96,14 @@ const StartRoutine = () => {
   const updateRoutine = async () => {
     await updateSavedRoutine({ newexercises, routineId });
     setModalVisible(false);
+    router.replace("/Workout/");
     // getRoutine();
   };
 
   const keepRoutine = async () => {
     //await updateSavedRoutine({ newexercises, routineId });
     setModalVisible(false);
+    router.replace("/Workout/");
   };
 
   const exercises = JSON.parse(routine_exercises);
