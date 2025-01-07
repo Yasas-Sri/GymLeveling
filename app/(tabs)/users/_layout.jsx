@@ -11,27 +11,30 @@ const WorkoutStack = () => {
             headerShown: false,
           }}
         />
+
         <Stack.Screen
-          name="EditProfile"
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Settings"
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="measurements"
+          name="nutritionPlan"
           options={{
             headerShown: false,
           }}
         />
 
         <Stack.Screen
-          name="addMeasurement"
+          name="workoutPlan"
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="addExercises"
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="progress"
           options={{
             headerShown: false,
           }}

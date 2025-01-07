@@ -3,7 +3,6 @@ import {
   Text,
   SafeAreaView,
   ScrollView,
-  Image,
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
@@ -17,6 +16,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import CustomButton from "../../../components/CustomButton";
 import { getRoutine, saveRoutine } from "../../../api/exerciseRoutines";
+import { Image } from "expo-image";
 
 const WorkoutPlan = () => {
   const { routineId } = useLocalSearchParams();

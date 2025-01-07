@@ -6,7 +6,7 @@ const WorkoutStack = () => {
     <>
       <Stack>
         <Stack.Screen
-          name="workout"
+          name="index"
           options={{
             headerShown: false,
           }}

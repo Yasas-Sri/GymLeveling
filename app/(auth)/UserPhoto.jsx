@@ -41,7 +41,7 @@ const saveImage = async (assets) => {
       encoding: "base64",
     });
     // Check if user is not null
-    const filePath = `${user.id}/${new Date().getTime()}.${img.type === "image" ? "png" : "mp4"}`;
+    const filePath = `${user.id}/profile.${img.type === "image" ? "png" : "mp4"}`;
     const contentType = img.type === "image" ? "image/png" : "video/mp4";
     await supabase.storage
       .from("images")
@@ -62,7 +62,7 @@ const UserPhoto = () => {
       setIsLoading(true);
       await saveImage(photo);
       setIsLoading(false);
-      router.replace("/home");
+      router.replace("/index");
     }
   };
 
@@ -76,7 +76,7 @@ const UserPhoto = () => {
     }
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 0.5,
@@ -97,7 +97,7 @@ const UserPhoto = () => {
     }
 
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 0.5,

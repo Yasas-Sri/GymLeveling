@@ -49,6 +49,7 @@ const Barchart = ({ data, flag }) => {
           totalRepsByDay[date] = 0;
         }
         totalRepsByDay[date] += exercise.reps;
+        console.log(totalRepsByDay[date]);
       }
     }
     return lastNDays.map((date) => totalRepsByDay[date] || 0);
@@ -81,7 +82,7 @@ const Barchart = ({ data, flag }) => {
   const totalReps = getTotalRepsByDay(data, range);
   const totalVolume = getTotalVolumeByDay(data, range);
   // console.log(lastNDays);
-  // console.log(totalReps);
+  console.log("reps", totalReps);
 
   const chartdata = {
     labels: lastNDays,

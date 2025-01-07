@@ -19,20 +19,34 @@ import {
 } from "@expo/vector-icons";
 import Barchart from "../../../components/Barchart";
 import { router } from "expo-router";
-import { getloggedExercises } from "../../../api/exerciseRoutines";
+import { getuserloggedExercises } from "../../../api/trainer";
 import useStore from "../../../store";
 import Linechart from "../../../components/LineChart";
-
-const Profile = () => {
+import { supabase } from "../../../lib/supabase";
+import ImageItem from "../../../components/ImageItem";
+import { useAuth } from "../../../context/AuthContext";
+import { useLocalSearchParams } from "expo-router";
+const Progress = () => {
   const [trackbtn, setTrackbtn] = useState("reps"); // set reps or volume
   const [flag, setFlag] = useState(0);
   const [modalVisible, setModalVisible] = useState("false");
   const [interval, setInterval] = useState("7days");
   const [title, setTitle] = useState("Last 7 days");
+  const [files, setFiles] = useState([]);
+  const [User, setUser] = useState({});
+  const { onLogin, authState } = useAuth();
+  const { userId, userName } = useLocalSearchParams();
 
-  const fetchloggedExercises = useStore((state) => state.fetchloggedExercises);
+  console.log("name", userName);
+  useEffect(() => {
+    console.log("Auth state changed:", authState);
+  }, [authState]);
+
+  const usersfetchloggedexercise = useStore(
+    (state) => state.usersfetchloggedexercise,
+  );
+  const imageFiles = useStore((state) => state.imageFiles);
   // console.log(fetchloggedExercises);
-  console.log("renderingprofile");
   useEffect(() => {
     const exercise = null;
     const currentDate = new Date();
@@ -42,8 +56,42 @@ const Profile = () => {
       start: thirtyDaysAgo.toISOString().split("T")[0],
       to: currentDate.toISOString(),
     };
-    getloggedExercises({ dateRange, exercise });
+    getuserloggedExercises({ dateRange, exercise, userId });
+  }, [userId]);
+
+  const getUser = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    // console.log(user);
+    return user;
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser();
+      setUser(user);
+      // console.log(user.id);
+    };
+
+    fetchUser();
   }, []);
+
+  // // useEffect(() => {}, []);
+
+  // useEffect(() => {
+  //   const loadDP = async () => {
+  //     // const {data: { user },  } = await supabase.auth.getUser();
+  //     //console.log(user);
+  //     const { data } = await supabase.storage.from("images").list(User.id);
+  //     // console.log(data);
+  //     if (data) {
+  //       setFiles(data);
+  //     }
+  //     console.log(files);
+  //   };
+  //   loadDP();
+  // }, [User.id]);
 
   const volumebtn = () => {
     setFlag(1);
@@ -70,43 +118,9 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        {/* margin not the same   */}
-        <View className="justify-between flex-row mt-2">
-          <TouchableOpacity>
-            <View className="  p-4  ml-2 min-w-20 justify-center self-center ">
-              <Text className="text-secondary  text-base">Edit Profile</Text>
-            </View>
-          </TouchableOpacity>
-
-          <Text className="text-white justify-items-center  self-center  font-pextrabold text-base  "></Text>
-
-          {/* <RNButton
-          mode="contained-tonal"
-          title="Save"
-          style="rounded  bg-secondary mr-2 min-w-24" 
-         //S handlePress={() => setActiveComponent('Exercises')}
-        /> */}
-
-          <TouchableOpacity>
-            <View className="   p-4  mr-2  self-center justify-items-center">
-              {/* <Text className=" justify-center  text-white self-center">Save</Text>       */}
-              <MaterialIcons name="settings" size={30} color="grey" />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View className=" flex-row  gap-4   items-center mt-2   px-4">
-          <Image
-            source={{ uri: "https://via.placeholder.com/100" }}
-            className="w-24 h-24 rounded-full border-4 border-white -mt-0"
-          />
-
+        <View className=" flex-row  gap-4  items-center mt-2 mx-2  px-4">
           <View>
-            <Text className="text-white text-2xl font-bold ">
-              Lan Mandragoran{" "}
-            </Text>
-
-            <Text className="text-white mt-1">workouts</Text>
+            <Text className="text-white text-2xl font-bold ">{userName}</Text>
           </View>
         </View>
 
@@ -127,10 +141,10 @@ const Profile = () => {
         </TouchableOpacity>
         <View className="ml-0">
           {interval === "7days" && (
-            <Barchart data={fetchloggedExercises} flag={flag} />
+            <Barchart data={usersfetchloggedexercise} flag={flag} />
           )}
           {interval === "30days" && (
-            <Linechart data={fetchloggedExercises} flag={flag} />
+            <Linechart data={usersfetchloggedexercise} flag={flag} />
           )}
 
           <View className="flex-row-reverse">
@@ -152,71 +166,6 @@ const Profile = () => {
           </View>
         </View>
 
-        <View className="p-4  ml-2 mt-7 w-fit mr-2 justify-center ">
-          <Text className="space-y-2   text-white font-pregular text-lg">
-            Workout Details
-          </Text>
-        </View>
-
-        {/* render the workouts that done and logged */}
-        <TouchableOpacity>
-          <View className="p-4  ml-2 m-2 w-fit mr-2 justify-center border-borderB border rounded-lg">
-            <Text className="space-y-2   text-white text-base">
-              Routine title
-            </Text>
-            <Text className="text-white">Date</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View className="p-4  ml-2 mt-2 w-fit mr-2 justify-between flex-row ">
-            <View className="flex-row gap-2">
-              <MaterialIcons name="work-history" size={30} color="white" />
-              <Text className="space-y-2   text-white text-base font-pmedium self-center">
-                Workout History
-              </Text>
-            </View>
-
-            <View className="  self-center justify-items-center">
-              <FontAwesome name="angle-right" size={30} color="grey" />
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View className="p-4  ml-2  w-fit mr-2  justify-between  flex-row">
-            <View className="flex-row gap-2">
-              <MaterialCommunityIcons
-                name="food-apple"
-                size={30}
-                color="white"
-              />
-              <Text className="space-y-2   text-white text-base font-pmedium self-center">
-                Nutrition
-              </Text>
-            </View>
-
-            <View className="  self-center justify-items-center">
-              <FontAwesome name="angle-right" size={30} color="grey" />
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        {/* <View className="space-y-4">
-          {menuItems.map((item, index) => (
-            <Pressable
-              key={index}
-              className="flex-row items-center justify-between p-4 border border-borderB rounded-lg bg-lightB"
-             // onPress={() => alert(`Navigate to ${item.title}`)}
-            >
-              <View className="flex-row items-center">
-                <Image source={item.icon} className="w-8 h-8 mr-4" />
-                <Text className="text-white text-lg">{item.title}</Text>
-              </View>
-              <Text className="text-black text-lg">&gt;</Text>
-            </Pressable>
-          ))}
-        </View> */}
         <Modal visible={modalVisible} transparent={true} animationType="slide">
           <TouchableWithoutFeedback onPress={() => setModalVisible("false")}>
             <View style={styles.modalContainer}>
@@ -230,6 +179,7 @@ const Profile = () => {
                         onPress={() => {
                           setInterval("7days");
                           setTitle("Last 7 days");
+                          setModalVisible("false");
                         }}
                         //disabled={isPressed1}
                         //className={isLoading ? "opacity-50" : "#0f0f36"}
@@ -240,6 +190,7 @@ const Profile = () => {
                         onPress={() => {
                           setInterval("30days");
                           setTitle("Last 30 days");
+                          setModalVisible("false");
                         }}
                         //disabled={isPressed2}
                         //className={isLoading ? "opacity-50" : "#0f0f36"}
@@ -256,7 +207,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Progress;
 
 const styles = StyleSheet.create({
   modalContainer: {

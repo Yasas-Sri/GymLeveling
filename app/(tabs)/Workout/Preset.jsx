@@ -9,6 +9,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Button,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState, useFocusEffect, useCallback } from "react";
 import {
@@ -51,43 +52,45 @@ const Preset = () => {
   const renderItem = ({ item }) => {
     //console.log(item.id);
     return (
-      <View className=" bg-cardB border-borderB border p-4 rounded-lg mt-1 mb-10 w-full">
-        <View className="justify-between flex-row">
-          <View className="flex-row gap-x-2">
-            <Text className="text-white text-lg ">{item.title}</Text>
-            {/* <Text className="text-white text-lg ">
+      <View className=" pb-3">
+        <View className=" bg-cardB border-borderB border p-4 rounded-lg mb-10 w-full">
+          <View className="justify-between flex-row">
+            <View className="flex-row gap-x-2">
+              <Text className="text-white text-lg ">{item.title}</Text>
+              {/* <Text className="text-white text-lg ">
               {item.routine_exercises}
             </Text> */}
-            <MaterialCommunityIcons name="dumbbell" size={30} color="grey" />
+              <MaterialCommunityIcons name="dumbbell" size={30} color="grey" />
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+                setroutineId(item.id);
+              }}
+            >
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={30}
+                color="white"
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              setModalVisible(true);
-              setroutineId(item.id);
-            }}
-          >
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={30}
-              color="white"
-            />
-          </TouchableOpacity>
+          <CustomButton
+            title="Start Routine"
+            handlePress={() =>
+              router.push({
+                pathname: "/Workout/StartRoutine",
+                params: {
+                  routine_exercises: JSON.stringify(item.routine_exercises), //`${item.routine_exercises}`,
+                  title: `${item.title}`,
+                  routineId: `${item.id}`,
+                },
+              })
+            }
+            containerStyles="mt-7"
+            //isLoading={loading}
+          />
         </View>
-        <CustomButton
-          title="Start Routine"
-          handlePress={() =>
-            router.push({
-              pathname: "/Workout/StartRoutine",
-              params: {
-                routine_exercises: JSON.stringify(item.routine_exercises), //`${item.routine_exercises}`,
-                title: `${item.title}`,
-                routineId: `${item.id}`,
-              },
-            })
-          }
-          containerStyles="mt-7"
-          //isLoading={loading}
-        />
       </View>
     );
   };
@@ -160,15 +163,29 @@ const Preset = () => {
             <View style={styles.modalContainer2}>
               <TouchableWithoutFeedback>
                 <View style={styles.modalContent2}>
-                  <View className="mb-2     w-full   ">
+                  {/* <View className="mb-2     w-full   ">
                     <Button
                       title="Delete Routine"
                       color="#0f0f36"
                       onPress={() => deleteroutines({ routineId })}
                       disabled={isLoading}
-                      //className={isLoading ? "opacity-50" : "#0f0f36"}
+                      className={isLoading ? "orange" : "blue"}
                     />
-                  </View>
+                  </View> */}
+
+                  <TouchableOpacity
+                    onPress={() => deleteroutines({ routineId })}
+                  >
+                    <View className=" bg-black border-borderB border mb-2  min-w-full p-2 rounded-xl min-h-[50px]  justify-center items-center">
+                      {isLoading ? (
+                        <ActivityIndicator size="small" color="#FF7E06" />
+                      ) : (
+                        <Text className="  text-white  font-psemibold text-base">
+                          Delete Routine
+                        </Text>
+                      )}
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </TouchableWithoutFeedback>
             </View>
@@ -186,7 +203,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)", //#0f0f36 rgba(0, 0, 0, 0.5)
     justifyContent: "flex-end",
     width: "100%",
   },
@@ -195,12 +212,14 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
 
-    backgroundColor: "white",
+    backgroundColor: "rgba(15, 15, 54,0.8)", //15, 15, 54
     //borderRadius: 50,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     height: "15%",
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "#363670",
+    borderWidth: 1,
   },
 });

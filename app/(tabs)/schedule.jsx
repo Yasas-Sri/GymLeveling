@@ -5,11 +5,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // import CalendarBook1 from '../../components/CalendarBook1';
 import CalendarPick from "../../components/CalendarPick";
 import { getSchedule } from "../../api/saveBooking";
+import { useAuth } from "../../context/AuthContext";
 
 const Schedule = () => {
+  const { authState } = useAuth();
   useEffect(() => {
     getSchedule();
   }, []);
+
+  useEffect(() => {
+    console.log("schedule Auth state changed:", authState);
+  }, [authState]);
 
   return (
     <SafeAreaView className="bg-primary h-full">

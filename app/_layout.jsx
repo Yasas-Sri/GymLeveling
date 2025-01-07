@@ -3,12 +3,19 @@ import { Stack, SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { getUserRole } from "../api/signupData";
+import useStore from "../store";
+import { useRouter, useSegments } from "expo-router";
+import { AuthProvider, useAuth } from "../context/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
-const RootLayout = () => {
-  const [session, setSession] = useState(null);
-
+const StackLayout = () => {
+  const { authState } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+  const [hasRedirected, setHasRedirected] = useState(false); // after login
+  const [hasRedirected1, setHasRedirected1] = useState(false);
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
@@ -22,65 +29,46 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if (error) throw error;
-
-    if (fontsLoaded) {
+    const inAuthGroup = segments[0] === "(tabs)";
+    if (!authState?.authenticated && fontsLoaded && !hasRedirected1) {
       SplashScreen.hideAsync();
+      router.replace("/");
+      setHasRedirected1(true);
+    } else if (authState?.authenticated && !hasRedirected && fontsLoaded) {
+      router.replace("/(tabs)");
+      SplashScreen.hideAsync();
+      setHasRedirected(true);
     }
-  }, [fontsLoaded, error]);
+  }, [
+    authState,
+    router,
+    segments,
+    hasRedirected,
+    fontsLoaded,
+    error,
+    hasRedirected1,
+  ]);
 
-  // Track the auth state
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === "SIGNED_IN") {
-          setSession(session);
-        } else {
-          setSession(null);
-        }
-      },
-    );
-
-    // Clean up the listener when the component unmounts
-    return () => {
-      // subscription.unsubscribe()
-      authListener?.subscription.unsubscribe();
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   if (session) {
-  //     router.replace('./(tabs)/home'); // Replace the current stack
-  //   } else {
-  //     router.replace('/(auth)'); // Navigate to auth stack
-  //   }
-  // }, [session]);
-
+  if (error) throw error;
   if (!fontsLoaded) {
     return null;
   }
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
 
-  if (!fontsLoaded && !error) {
-    return null;
-  }
+const RootLayout = () => {
+  const [session, setSession] = useState(null);
 
   return (
-    <>
-      {/* {session && 
-     <SignInStack />
-      }
-  
-
-   {!session && 
-       <SignOutStack />
-     } */}
-
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </>
+    <AuthProvider>
+      <StackLayout />
+    </AuthProvider>
   );
 };
 export default RootLayout;

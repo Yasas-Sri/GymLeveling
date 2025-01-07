@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
@@ -14,6 +13,9 @@ import { useLocalSearchParams } from "expo-router";
 import useStore from "../../../store";
 import { router } from "expo-router";
 import ExerciseInfo from "./ExerciseInfo";
+import FastImage from "react-native-fast-image";
+import { WebView } from "react-native-webview";
+import { Image } from "expo-image";
 
 const ExerciseData = () => {
   const [activeComponent, setActiveComponent] = useState("Info");

@@ -10,12 +10,26 @@ import { router } from "expo-router";
 //import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from "../components/CustomButton";
 import { PaperProvider } from "react-native-paper";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 //import { supabase } from '../lib/supabase'
 
 import React from "react";
 
 export default function App() {
+  // const change = () => {
+  //   if (true) {
+  //     router.replace("/sign-in");
+  //   }
+  // };
+
+  const { authState } = useAuth();
+  useEffect(() => {
+    console.log("Auth state changed:", authState);
+  }, [authState]);
+  // change();
+
   // const [session, setSession] = useState(null)
 
   // useEffect(() => {
@@ -27,6 +41,10 @@ export default function App() {
   //     setSession(session)
   //   })
   // }, [])
+
+  // useEffect(() => {
+  //   change();
+  // }, []);
 
   return (
     <PaperProvider>
